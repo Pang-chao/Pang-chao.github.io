@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python里的那些“魔术方法” | Pang Chao的个人主页</title><meta name="keywords" content="魔术方法"><meta name="author" content="Pang Chao"><meta name="copyright" content="Pang Chao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什么是魔术方法？在Python中，所有以双下划线__包起来的方法，统称为Magic Method（魔术方法），它是一种的特殊方法，普通方法需要调用，而魔术方法不需要调用就可以自动执行。或许在之前，你不知道这个概念，但我保证，只要你用过Python，那你一定在不经意间用过魔术方法。例如：对于两个字符串，你可能会用“+”号把他们连起来，得到一个合起来之后的字符串： 1234567a &#x3D; &amp;#x27;H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python里的那些“魔术方法”">
+<meta property="og:url" content="http://sdupc.top/2022/06/13/magic_methods/index.html">
+<meta property="og:site_name" content="Pang Chao的个人主页">
+<meta property="og:description" content="什么是魔术方法？在Python中，所有以双下划线__包起来的方法，统称为Magic Method（魔术方法），它是一种的特殊方法，普通方法需要调用，而魔术方法不需要调用就可以自动执行。或许在之前，你不知道这个概念，但我保证，只要你用过Python，那你一定在不经意间用过魔术方法。例如：对于两个字符串，你可能会用“+”号把他们连起来，得到一个合起来之后的字符串： 1234567a &#x3D; &amp;#x27;H">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/19/NTEj9nfHmsdaAvZ.png">
+<meta property="article:published_time" content="2022-06-13T07:18:09.000Z">
+<meta property="article:modified_time" content="2023-10-19T14:37:56.782Z">
+<meta property="article:author" content="Pang Chao">
+<meta property="article:tag" content="魔术方法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/19/NTEj9nfHmsdaAvZ.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2022/06/13/magic_methods/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python里的那些“魔术方法”',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-19 22:37:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/19/NTEj9nfHmsdaAvZ.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Pang Chao的个人主页</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python里的那些“魔术方法”</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-06-13T07:18:09.000Z" title="发表于 2022-06-13 15:18:09">2022-06-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-19T14:37:56.782Z" title="更新于 2023-10-19 22:37:56">2023-10-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python里的那些“魔术方法”"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="什么是魔术方法？"><a href="#什么是魔术方法？" class="headerlink" title="什么是魔术方法？"></a>什么是魔术方法？</h1><p>在Python中，所有以双下划线<code>__</code>包起来的方法，统称为<strong>Magic Method（魔术方法）</strong>，它是一种的特殊方法，普通方法需要调用，而魔术方法不需要调用就可以自动执行。或许在之前，你不知道这个概念，但我保证，只要你用过Python，那你一定在不经意间用过魔术方法。例如：对于两个字符串，你可能会用“+”号把他们连起来，得到一个合起来之后的字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&#x27;Hello, &#x27;</span></span><br><span class="line">b = <span class="string">&#x27;World!&#x27;</span></span><br><span class="line">c = a + b</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>
+
+<p>但是，按理说，“+”只能对于数使用，字符串之间是不能相加的，那为什么上面那段程序还能够运行呢？这就是魔术方法的功劳了。事实上，因为str类实现了__add__魔术方法，进而实现了运算符重载，所以我们可以通过“+”来实现字符串的拼接。</p>
+<p>魔术方法在类或对象的某些事件触发后会自动执行，让类具有神奇的“魔力”。如果希望根据自己的程序定制自己特殊功能的类，那么就需要对这些方法进行重写。例如，如果我们想要实现一个自己的字符串类，在两个长度相等的全是字母的字符串相加时，返回一个结果字符串，它的每个字符是两个字符串相应位置字母表排序更大的那个字母，那么我们就可以重写__add__魔术方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mystr</span>(<span class="params"><span class="built_in">str</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        self.s = s</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span>(<span class="params">self, other</span>):</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.s) != <span class="built_in">len</span>(other):</span><br><span class="line">            <span class="keyword">raise</span> ValueError</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(self.s)):</span><br><span class="line">                <span class="keyword">if</span> self.s[i] &gt; other[i]:</span><br><span class="line">                    res.append(self.s[i])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    res.append(other[i])</span><br><span class="line">            <span class="comment"># 此处可简化为</span></span><br><span class="line">            <span class="comment"># res = [self.s[i] if self.s[i] &gt; other[i] </span></span><br><span class="line">            <span class="comment">#        else other[i] for i in range(len(self.s))]</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(res)</span><br><span class="line"></span><br><span class="line">a = Mystr(<span class="string">&#x27;jasndkcaww&#x27;</span>)</span><br><span class="line">b = Mystr(<span class="string">&#x27;lopergvmei&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(a + b)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">losnrkvmww</span><br></pre></td></tr></table></figure>
+
+<h1 id="常用的魔术方法"><a href="#常用的魔术方法" class="headerlink" title="常用的魔术方法"></a>常用的魔术方法</h1><h2 id="1-初始化方法-init"><a href="#1-初始化方法-init" class="headerlink" title="1. 初始化方法____init____"></a>1. 初始化方法____init____</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">触发机制：实例化对象之后立即触发</span><br><span class="line">参数：至少有一个self，接收当前对象，其他参数根据需要进行定义</span><br><span class="line">返回值：无</span><br><span class="line">作用：初始化对象的成员</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-获取对象长度-len"><a href="#2-获取对象长度-len" class="headerlink" title="2. 获取对象长度__len__"></a>2. 获取对象长度__len__</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">触发时机：使用len(对象) 的时候触发</span><br><span class="line">参数：一个参数self</span><br><span class="line">返回值：必须是一个整型</span><br><span class="line">作用：可以设置为检测对象成员个数，但是也可以进行其他任意操作</span><br><span class="line">注意：返回值必须必须是整数，否则语法报错，另外该要求是格式要求。</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-构造对象的字符串表示-str-与-repr"><a href="#3-构造对象的字符串表示-str-与-repr" class="headerlink" title="3. 构造对象的字符串表示__str__与__repr__"></a>3. 构造对象的字符串表示__str__与__repr__</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">触发时机:__str__：使用print(对象)或者str(对象)，__repr__：repr(对象)的时候触发</span><br><span class="line">参数：一个self接收对象</span><br><span class="line">返回值：必须是字符串类型</span><br><span class="line">作用：print（对象时）进行操作，得到字符串，通常用于快捷操作</span><br><span class="line">注意：__repr__更严谨，是主要给机器用的格式，而__str__主要是给用户看的格式</span><br></pre></td></tr></table></figure>
+
+<p>未完待续……</p>
+<h1 id="魔术方法大全"><a href="#魔术方法大全" class="headerlink" title="魔术方法大全"></a>魔术方法大全</h1><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>参数列表</th>
+<th>调用时机</th>
+<th>返回值类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__repr__</code></td>
+<td><code>self</code></td>
+<td>当调用<code>repr()</code>函数时</td>
+<td><code>str</code></td>
+<td>返回值应为重建该对象的Python表达式（如果可能），或包含其他信息的字符串<code>&lt;...&gt;</code></td>
+</tr>
+<tr>
+<td><code>__str__</code></td>
+<td><code>self</code></td>
+<td>当调用<code>str()</code>函数时</td>
+<td><code>str</code></td>
+<td>调用<code>print()</code>等其他函数时会隐式调用<code>__str__()</code>，当不存在<code>__str__()</code>时会自动调用<code>__repr__()</code></td>
+</tr>
+<tr>
+<td><code>__format__</code></td>
+<td><code>self, format_spec</code></td>
+<td>当调用<code>format()</code>函数时</td>
+<td><code>str</code></td>
+<td><code>object.__format__(x, &#39;&#39;)</code>等价于<code>str(x)</code></td>
+</tr>
+<tr>
+<td><code>__bytes__</code></td>
+<td><code>self</code></td>
+<td>当调用<code>bytes()</code>函数时</td>
+<td><code>bytes</code></td>
+<td>返回值是对象的字节表示</td>
+</tr>
+<tr>
+<td><code>__bool__</code></td>
+<td><code>self</code></td>
+<td>调用<code>bool()</code>函数时</td>
+<td><code>bool</code></td>
+<td>当<code>__bool__</code>函数没有定义时，会隐式 调用<code>__len__</code>，如果<code>__len__</code>也没有 定义，则返回<code>True</code></td>
+</tr>
+<tr>
+<td><code>__complex__</code></td>
+<td><code>self</code></td>
+<td>调用<code>commplex()</code>函数时</td>
+<td><code>complex</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>__int__</code></td>
+<td><code>self</code></td>
+<td>调用<code>int()</code>函数时</td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>__float__</code></td>
+<td><code>self</code></td>
+<td>调用<code>float()</code>函数时</td>
+<td><code>float</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>__hash__</code></td>
+<td><code>self</code></td>
+<td>调用<code>hash()</code></td>
+<td>函数时</td>
+<td><code>hash()</code>函数将<code>__hash__()</code>的返回值 截断到<code>Py_ssize_t</code>的范围内，64位系 统下<code>Py_ssize_t</code>为8字节；<code>set</code>等类 型的操作也会调用对象的<code>__hash__</code>函 数</td>
+</tr>
+<tr>
+<td><code>__index__</code></td>
+<td><code>self</code></td>
+<td>调用<code>operator.index()</code>或Python需要整数值时</td>
+<td><code>int</code></td>
+<td>当<code>__int__</code>、<code>__float__</code>、 <code>__complex__</code>没有实现时，这些函数隐式地调用<code>__index__</code></td>
+</tr>
+<tr>
+<td><code>__len__</code></td>
+<td><code>self</code></td>
+<td>调用<code>len()</code>函数时</td>
+<td><code>int</code></td>
+<td>返回值必须为非负整数，在CPython中返回值不能超过<code>sys.maxsize</code>中定义的值，否则<code>len()</code>等函数会抛出<code>OverflowError</code>等异常</td>
+</tr>
+<tr>
+<td><code>__getitemm__</code></td>
+<td><code>self, key</code></td>
+<td>使用<code>[]</code>运算符时（右值）</td>
+<td></td>
+<td><code>key</code>可以为合法的数组下标，也可以是反向的下标，也可以是序列的切片，该函数应在<code>key</code>类型不对应时抛出<code>TypeError</code>，<code>key</code>超出范围时抛出<code>IndexError</code>或<code>KeyError</code>（对于映射类型）</td>
+</tr>
+<tr>
+<td><code>__setitem__</code></td>
+<td><code>self, key, value</code></td>
+<td>使用<code>[]</code>运算符时（左值）</td>
+<td><code>None</code></td>
+<td><code>key</code>参数的取值及异常处理与<code>__getitem__</code>函数相同</td>
+</tr>
+<tr>
+<td><code>__delitem__</code></td>
+<td><code>self, key</code></td>
+<td>使用<code>del</code>删除序列中的元素时</td>
+<td><code>None</code></td>
+<td>对于不可删除的序列或映射，无需实现该函数，其他同<code>__getitem__</code></td>
+</tr>
+<tr>
+<td><code>__contains__</code></td>
+<td><code>self, item</code></td>
+<td>使用<code>in</code>作为运算符时</td>
+<td><code>bool</code></td>
+<td>对于映射类型，<code>__contains__</code>接收的<code>item</code>参数对应映射的<code>key</code>部分而不是<code>value</code>部分。若没有定义该函数，Python首先通过<code>__iter__</code>进行查找，其次使用<code>__getitem__</code>进行查找</td>
+</tr>
+<tr>
+<td><code>__iter__</code></td>
+<td><code>self</code></td>
+<td>调用<code>iter()</code>函数或使用循环时</td>
+<td></td>
+<td>返回值应为可迭代对象，对于可迭代对象，<code>__iter__</code>函数返回自身</td>
+</tr>
+<tr>
+<td><code>__reversed__</code></td>
+<td><code>self</code></td>
+<td>调用<code>reversed()</code>函数时</td>
+<td></td>
+<td>返回值应为可迭代对象，且是原序列的逆序</td>
+</tr>
+<tr>
+<td><code>__next__</code></td>
+<td><code>self</code></td>
+<td>调用<code>next()</code>函数时</td>
+<td></td>
+<td>返回可迭代对象中的下一个元素，当到达最后一个元素时抛出<code>StopIteration</code></td>
+</tr>
+<tr>
+<td><code>__call__</code></td>
+<td><code>self, *args, **kwargs</code></td>
+<td>当对象以函数的方式被调用时</td>
+<td></td>
+<td>定义了<code>__call__</code>方法的对象属于<code>typing.Callable</code>类型</td>
+</tr>
+<tr>
+<td><code>__enter__</code></td>
+<td><code>self</code></td>
+<td>使用<code>with</code>关键词声明上下文时</td>
+<td><code>Any</code></td>
+<td>返回值分配给<code>as</code>关键词指明的对象</td>
+</tr>
+<tr>
+<td><code>__exit__</code></td>
+<td><code>self, exc_type, exc_value, traceback</code></td>
+<td>离开<code>with</code>块时</td>
+<td><code>Any</code></td>
+<td>若<code>with</code>块执行过程中没有出现异常，则<code>exc_type, exc_value, traceback</code>参数均为<code>None</code>，否则<code>exit</code>块可以对异常进行处理</td>
+</tr>
+<tr>
+<td><code>__new__</code></td>
+<td><code>cls[, ...]</code></td>
+<td>创建类实例时</td>
+<td><code>Any</code></td>
+<td><code>__new__</code>为静态方法且先于<code>__init__</code>执行，<code>__new__</code>的其余参数会传递给<code>__init__</code>。若<code>__new__</code>返回的类型与创建的类型不对应，则不会执行<code>__init__</code></td>
+</tr>
+<tr>
+<td><code>__init__</code></td>
+<td><code>self, ...</code></td>
+<td>初始化类实例时</td>
+<td><code>None</code></td>
+<td>若基类定义了<code>__init__</code>，则在子类的<code>__init__</code>中必须有<code>super().__init()</code>的显式调用</td>
+</tr>
+<tr>
+<td><code>__del__</code></td>
+<td><code>self</code></td>
+<td>对象销毁时</td>
+<td><code>None</code></td>
+<td>当对象的引用计数减为0时，对象才可能被删除</td>
+</tr>
+<tr>
+<td><code>__getattribute__</code></td>
+<td><code>self, name</code></td>
+<td>使用<code>self.name</code>访问对象的属性时</td>
+<td><code>Any</code></td>
+<td>为避免无限递归，子类的<code>__getattribute__</code>方法的实现中必须包含父类的<code>__getattribute__</code>方法调用</td>
+</tr>
+<tr>
+<td><code>__getattr__</code></td>
+<td><code>self, name</code></td>
+<td>使用<code>self.name</code>访问对象的不存在属性或<code>__getattribute__</code>函数抛出<code>AttributeError</code>异常</td>
+<td><code>Any</code></td>
+<td>当<code>__getattribute__</code>正常执行时<code>__getattr__</code>不会执行</td>
+</tr>
+<tr>
+<td><code>__setattr__</code></td>
+<td><code>self, name, value</code></td>
+<td>使用<code>self.name</code>设置属性的值时</td>
+<td><code>None</code></td>
+<td>当试图通过<code>__setattr__</code>向对象设置属性值时必须通过类型的<code>__setattr__</code>方法进行设置</td>
+</tr>
+<tr>
+<td><code>__delattr__</code></td>
+<td><code>self, name</code></td>
+<td>执行<code>del self.name</code>时</td>
+<td><code>None</code></td>
+<td>仅当<code>del self.name</code>语句有意义时，才需要实现该方法</td>
+</tr>
+<tr>
+<td><code>__dir__</code></td>
+<td><code>self</code></td>
+<td>执行<code>dir()</code>函数时</td>
+<td><code>Sequence</code></td>
+<td><code>dir()</code>会自动进行排序处理</td>
+</tr>
+</tbody></table>
+<p>运算符重载相关的魔术方法：</p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th>方法名</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取负</td>
+<td><code>__neg__</code></td>
+<td><code>-</code></td>
+</tr>
+<tr>
+<td>取正</td>
+<td><code>__pos__</code></td>
+<td><code>+</code></td>
+</tr>
+<tr>
+<td>绝对值</td>
+<td><code>__abs__</code></td>
+<td><code>abs()</code></td>
+</tr>
+<tr>
+<td>小于</td>
+<td><code>__lt__</code></td>
+<td><code>&lt;</code></td>
+</tr>
+<tr>
+<td>小于等于</td>
+<td><code>__le__</code></td>
+<td><code>&lt;=</code></td>
+</tr>
+<tr>
+<td>等于</td>
+<td><code>__eq__</code></td>
+<td><code>==</code></td>
+</tr>
+<tr>
+<td>不等于</td>
+<td><code>__ne__</code></td>
+<td><code>!=</code></td>
+</tr>
+<tr>
+<td>大于</td>
+<td><code>__gt__</code></td>
+<td><code>&gt;</code></td>
+</tr>
+<tr>
+<td>大于等于</td>
+<td><code>__ge__</code></td>
+<td><code>&gt;=</code></td>
+</tr>
+<tr>
+<td>相加</td>
+<td><code>__add__</code></td>
+<td><code>+</code></td>
+</tr>
+<tr>
+<td>相减</td>
+<td><code>__sub__</code></td>
+<td><code>-</code></td>
+</tr>
+<tr>
+<td>相乘</td>
+<td><code>__mul__</code></td>
+<td><code>*</code></td>
+</tr>
+<tr>
+<td>实数除</td>
+<td><code>__truediv__</code></td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td>整数除</td>
+<td><code>__floordiv__</code></td>
+<td><code>//</code></td>
+</tr>
+<tr>
+<td>取余</td>
+<td><code>__mod__</code></td>
+<td><code>%</code></td>
+</tr>
+<tr>
+<td>整数除+取余</td>
+<td><code>__divmod__</code></td>
+<td><code>divmod()</code></td>
+</tr>
+<tr>
+<td>乘方</td>
+<td><code>__pow__</code></td>
+<td><code>**</code></td>
+</tr>
+<tr>
+<td>取整</td>
+<td><code>__round__</code></td>
+<td><code>round()</code></td>
+</tr>
+<tr>
+<td>按位取反</td>
+<td><code>__invert__</code></td>
+<td><code>~</code></td>
+</tr>
+<tr>
+<td>左移</td>
+<td><code>__lshift__</code></td>
+<td><code>&lt;&lt;</code></td>
+</tr>
+<tr>
+<td>右移</td>
+<td><code>__rshift__</code></td>
+<td><code>&gt;&gt;</code></td>
+</tr>
+<tr>
+<td>按位与</td>
+<td><code>__and__</code></td>
+<td><code>&amp;</code></td>
+</tr>
+<tr>
+<td>按位或</td>
+<td><code>__or__</code></td>
+<td>`</td>
+</tr>
+<tr>
+<td>按位异或</td>
+<td><code>__xor__</code></td>
+<td><code>^</code></td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Pang Chao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2022/06/13/magic_methods/">http://sdupc.top/2022/06/13/magic_methods/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Pang Chao的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/">魔术方法</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/19/NTEj9nfHmsdaAvZ.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/06/rdkit1/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2022/08/06/oLD9xzBcXnMP2Q7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">RDKit基础操作 (一)</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/04/segment-tree/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2022/04/04/SIZGrMEu4PCWJoA.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">树状数组+线段树</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Pang Chao</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pangchao@mail.sdu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的个人主页~有学术上或者其他方面的问题都欢迎邮件交流！邮箱：pangchao@mail.sdu.edu.cn</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是魔术方法？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">常用的魔术方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%B9%E6%B3%95-init"><span class="toc-number">2.1.</span> <span class="toc-text">1. 初始化方法____init____</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E9%95%BF%E5%BA%A6-len"><span class="toc-number">2.2.</span> <span class="toc-text">2. 获取对象长度__len__</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9E%84%E9%80%A0%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A1%A8%E7%A4%BA-str-%E4%B8%8E-repr"><span class="toc-number">2.3.</span> <span class="toc-text">3. 构造对象的字符串表示__str__与__repr__</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95%E5%A4%A7%E5%85%A8"><span class="toc-number">3.</span> <span class="toc-text">魔术方法大全</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/17/sql_join_aggre/" title="SQL中JOIN与聚合函数的冲突解决方案"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2023/10/18/yqc13pZvGNkOjKi.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL中JOIN与聚合函数的冲突解决方案"/></a><div class="content"><a class="title" href="/2023/10/17/sql_join_aggre/" title="SQL中JOIN与聚合函数的冲突解决方案">SQL中JOIN与聚合函数的冲突解决方案</a><time datetime="2023-10-17T07:40:58.000Z" title="发表于 2023-10-17 15:40:58">2023-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/03/SKF/" title="SKF实习经历小结"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2023/09/17/Q5cIYv2rBsZFSm9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SKF实习经历小结"/></a><div class="content"><a class="title" href="/2023/09/03/SKF/" title="SKF实习经历小结">SKF实习经历小结</a><time datetime="2023-09-03T06:56:13.000Z" title="发表于 2023-09-03 14:56:13">2023-09-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/28/intern/" title="找实习经历总结"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2023/09/17/fO8sD2KM1bhLItQ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="找实习经历总结"/></a><div class="content"><a class="title" href="/2023/06/28/intern/" title="找实习经历总结">找实习经历总结</a><time datetime="2023-06-28T05:27:35.000Z" title="发表于 2023-06-28 13:27:35">2023-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/21/effective%20python/" title="《Effective Python》总结"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2023/09/17/8fUOFNuDGX1lnhJ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《Effective Python》总结"/></a><div class="content"><a class="title" href="/2023/04/21/effective%20python/" title="《Effective Python》总结">《Effective Python》总结</a><time datetime="2023-04-21T11:25:39.000Z" title="发表于 2023-04-21 19:25:39">2023-04-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/23/adobe%20illustrator/" title="Illustrator——一款非常好用的科研绘图软件"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://s2.loli.net/2023/10/06/rfQTDnBqSd7XZpF.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Illustrator——一款非常好用的科研绘图软件"/></a><div class="content"><a class="title" href="/2022/12/23/adobe%20illustrator/" title="Illustrator——一款非常好用的科研绘图软件">Illustrator——一款非常好用的科研绘图软件</a><time datetime="2022-12-23T09:15:31.000Z" title="发表于 2022-12-23 17:15:31">2022-12-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Pang Chao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: [],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://fastly.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script>(function(d, w, c) {
+    w.ChatraID = '2ptoPuy2yQ4D5Fty7';
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
+
+if (true) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      Chatra('openChat')
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      Chatra('hide')
+    }
+    function chatBtnShow () {
+      Chatra('show')
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
