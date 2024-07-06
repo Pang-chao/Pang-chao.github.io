@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数字信号处理 | Chao Pang的个人主页</title><meta name="author" content="Chao Pang"><meta name="copyright" content="Chao Pang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="统计、概率和噪声信号与曲线信号是对一个参数怎样与另一个参数相关的一种描述。两个参数都连续的信号称为连续信号，两个参数都离散的称为离散信号或数字信号。（注意：有些信号是离散的，但在图中却被表示为连续的。）Y轴纵坐标称为幅值，X轴横坐标称为代表另一个参数。横轴上的参数类型就是信号所在的域。抽样点索引在DSP中通常从0到N-1。 平均值和标准偏差平均值：$$\mu &#x3D; \frac{1}{N}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字信号处理">
+<meta property="og:url" content="http://sdupc.top/2024/07/06/dps/index.html">
+<meta property="og:site_name" content="Chao Pang的个人主页">
+<meta property="og:description" content="统计、概率和噪声信号与曲线信号是对一个参数怎样与另一个参数相关的一种描述。两个参数都连续的信号称为连续信号，两个参数都离散的称为离散信号或数字信号。（注意：有些信号是离散的，但在图中却被表示为连续的。）Y轴纵坐标称为幅值，X轴横坐标称为代表另一个参数。横轴上的参数类型就是信号所在的域。抽样点索引在DSP中通常从0到N-1。 平均值和标准偏差平均值：$$\mu &#x3D; \frac{1}{N}">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg">
+<meta property="article:published_time" content="2024-07-06T07:17:56.000Z">
+<meta property="article:modified_time" content="2024-07-06T07:28:24.317Z">
+<meta property="article:author" content="Chao Pang">
+<meta property="article:tag" content="信号处理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2024/07/06/dps/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数字信号处理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-06 15:28:24'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Chao Pang的个人主页"><span class="site-name">Chao Pang的个人主页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数字信号处理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T07:28:24.317Z" title="更新于 2024-07-06 15:28:24">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数字信号处理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="统计、概率和噪声"><a href="#统计、概率和噪声" class="headerlink" title="统计、概率和噪声"></a>统计、概率和噪声</h1><h2 id="信号与曲线"><a href="#信号与曲线" class="headerlink" title="信号与曲线"></a>信号与曲线</h2><p><strong>信号</strong>是对一个参数怎样与另一个参数相关的一种描述。<br>两个参数都连续的信号称为<strong>连续信号</strong>，两个参数都离散的称为<strong>离散信号或数字信号</strong>。（注意：有些信号是离散的，但在图中却被表示为连续的。）<br>Y轴纵坐标称为<strong>幅值</strong>，X轴横坐标称为代表另一个参数。横轴上的参数类型就是信号所在的<strong>域</strong>。抽样点索引在DSP中通常<strong>从0到N-1</strong>。</p>
+<h2 id="平均值和标准偏差"><a href="#平均值和标准偏差" class="headerlink" title="平均值和标准偏差"></a>平均值和标准偏差</h2><p><strong>平均值</strong>：<br>$$<br>\mu &#x3D; \frac{1}{N} \sum_{i&#x3D;0}^{N-1}{x_i}<br>$$<br>平均值通常称为<strong>DC（直流）</strong>值，相应的<strong>AC（交流）</strong>代表的是信号在平均值上下的浮动。<br><strong>偏差</strong>：<br>$$<br>\sigma &#x3D; \left|{x_i - \mu}\right|<br>$$<br><strong>标准偏差</strong>：<br>$$<br>\sigma^2 &#x3D; \frac{1}{N-1}\sum_{i&#x3D;0}^{N-1}{ {x_i - \mu}^2}<br>$$</p>
+<p>$\sigma^2$称为<strong>方差</strong>。<strong>RMS均方根</strong>。连续统计中<strong>标准偏差</strong>的计算：<br>$$<br>\sigma^2 &#x3D; \frac{1}{N-1} \left[ \sum_{i&#x3D;0}^{N-1}{ {x_i}^2} - \frac{1}{N}\left( \sum_{i&#x3D;0}^{N-1}{ {x_i}^2} \right)^2 \right]<br>$$<br><strong>信噪比（SNR）</strong>等于平均值除以标准偏差。<strong>变异系数（CV）</strong>等于标准偏差除以平均值，再乘100%。<br>好的数据意味着有较大的SNR值和较小的CV值。</p>
+<h2 id="信号和基本过程"><a href="#信号和基本过程" class="headerlink" title="信号和基本过程"></a>信号和基本过程</h2><p><strong>采集信号：带有统计波动。</strong>基本过程：准确。<br>对于随机信号，N点的平均值和基本过程的平均值之间的<strong>典型差错</strong>为：$\frac{\sigma}{N^{1&#x2F;2} }$。其中$\sigma$是标准偏差。N越大，误差越小。平均值公式中，除以N-1是对基本过程标准偏差的一个<strong>估计</strong>。除以N是采集信号的标准偏差。</p>
+<h2 id="直方图、概率质量函数和概率密度函数"><a href="#直方图、概率质量函数和概率密度函数" class="headerlink" title="直方图、概率质量函数和概率密度函数"></a>直方图、概率质量函数和概率密度函数</h2><p>直方图中所有值的<strong>总和</strong>：$$N &#x3D; \sum_{i&#x3D;0}^{M-1}{H_i}$$。$H_i$代表直方图，$N$是信号的抽样点数，$M$是直方图中的点数。使用直方图计算<strong>平均值</strong>和<strong>标准偏差</strong>：<br>$$<br>\mu &#x3D; \frac{1}{N} \sum_{i&#x3D;0}^{M-1}{i H_i}<br>$$</p>
+<p>$$<br>\sigma^2 &#x3D; \frac{1}{N-1}\sum_{i&#x3D;0}^{M-1}{ {i - \mu}^2 H_i}<br>$$</p>
+<p>直方图是由采集信号形成的，相应的基本过程的曲线称为<strong>概率质量函数（pmf）</strong>。pmf由无限个抽样点获得，纵坐标为抽样点数除以抽样点总数，可以从直方图估计出来。如果用于连续信号则为<strong>概率密度函数或概率分布函数</strong>，其曲线之下总面积为1。</p>
+<h2 id="正态分布"><a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h2><p><strong>正态分布（高斯分布）</strong>：<br>$$<br>P(x) &#x3D; \frac{1}{\sqrt{2\pi}\sigma}e^{-{(x-\mu)}^2 &#x2F; 2\sigma^2}<br>$$<br>$P(x)$是概率分布函数，$\mu$是期望，$\sigma$是标准差。<br>概率分布函数的积分为<strong>累积分布函数</strong>，表示信号的数值将会落在某一确定的范围内的概率。<br>高斯函数的积分只能通过数值积分的方法实现。$\Phi(x)$是正态分布的累积分布函数（平均值为0，方差为1）。</p>
+<h2 id="数字噪声的产生"><a href="#数字噪声的产生" class="headerlink" title="数字噪声的产生"></a>数字噪声的产生</h2><p>核心是<strong>随机数字生成器</strong>。0到1之间的随机数字生成器平均值为0.5，标准偏差是$1 &#x2F; \sqrt{12} &#x3D; 0.29$。<br><strong>独立随机信号相加时，偏差也相加</strong>。<strong>中心极限定理：随机数的和随着越来越多的随机数相加在一起而变成正态分布。</strong><br>正态分布随机数可由下式得到：<br>$$<br>X &#x3D; {(-2ln R_1)}^{1&#x2F;2} cos(2\pi R_2)<br>$$<br>$R_1$和$R_2$​是在0到1之间均匀分布的随机数。形成的X呈正态分布，平均值为0，方差为1。余弦以弧度计。</p>
+<h2 id="精度和准确度"><a href="#精度和准确度" class="headerlink" title="精度和准确度"></a>精度和准确度</h2><p>想要得到的值为<strong>真值</strong>，测量得到的是<strong>测量值</strong>。平均值相对于真值发生的偏移程度称为测量的<strong>准确度</strong>，<br>是一个对<em>系统校准的衡量</em>。每次独立的测量值在彼此之间也有差别，分布的宽度称为测量的<strong>精度</strong>，是对随机噪声的衡量。较差的准确度源于<strong>系统误差</strong>。较差的精度源于<strong>随机误差</strong>。</p>
+<h1 id="模数转换与数模转换"><a href="#模数转换与数模转换" class="headerlink" title="模数转换与数模转换"></a>模数转换与数模转换</h1><h2 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h2><p><strong>抽样</strong>是指<em>独立的变量</em>（自变量）从连续转换到离散的过程。<strong>量化</strong>是指将因变量从连续状态转换到离散状态的过程。数字化的信号中任何抽样都会有最大$\pm 1&#x2F;2 LSB$（LSB，最低有效位）的误差。<br>多数情况下，<em>量化对信号来说无非是增加了特定量的随机噪声</em>。只有当量化误差不能被当成随机误差处理的时候，如多次连续的抽样中模拟信号保持相同的数值时，量化模型不是有效的。<strong>加抖动</strong>是改进这些缓变信号数字化效果的常见技术。（在模拟信号中叠加少量的随机噪声）。</p>
+<h2 id="抽样定理"><a href="#抽样定理" class="headerlink" title="抽样定理"></a>抽样定理</h2><p>如果抽样信号能够无失真地恢复原来的模拟信号，就是合适的抽样。在抽样过程中频率改变的现象称为<strong>混叠</strong>。<br><strong>奈奎斯特抽样定理</strong>：只有一个连续信号不包含大于抽样率一半以上的频率成分时，才能认为是合适的抽样。<br>频率混叠也能改变相位。只有0和180的相位反转是可能的。脉冲序列是包含一系列与原始信号抽样时刻相对应窄尖峰（脉冲）的连续信号。<br>每个脉冲都无限窄。</p>
+<h2 id="数模转换"><a href="#数模转换" class="headerlink" title="数模转换"></a>数模转换</h2><p>原始模拟信号可以通过其脉冲序列经由低通滤波器实现无失真的恢复，要求滤波器的截止频率是抽样频率的一半。虽然数学上这个方法很简单，但在电子学里产生所需的窄脉冲是很困难的。基本所有的数模转换操作都是在接收到另一个新的抽样值之前保持最后一个值，这被称作<strong>零阶保持</strong>。在频域中，零阶保持造成脉冲序列的频谱与sinc函数相乘，sinc曲线为：<br>$$<br>H(f) &#x3D; \left| {\frac{sin(\pi f &#x2F; f_s)}{\pi f &#x2F; f_s} } \right|<br>$$<br>更通用的表达式是<br>$$<br>sin(\pi x) &#x2F; (\pi x)<br>$$<br>用模拟滤波器将零阶保持信号转换成为不失真的信号，需要两个条件：滤除所有在抽样频率一半以上的频率成分，以及产生频率是零阶保持效应频率的倒数，也就是$1&#x2F;sinc(x)$。</p>
+<h2 id="用于数据转换的模拟滤波器"><a href="#用于数据转换的模拟滤波器" class="headerlink" title="用于数据转换的模拟滤波器"></a>用于数据转换的模拟滤波器</h2><p>在未进行模数转换之前，输入信号先通过低通滤波器除去所有的奈奎斯特频率（抽样速率的一半）以上的所有频率成分。这么做是为了避免在抽样期间发生频率混叠，因此称其为<strong>抗混叠滤波器</strong>。在另一端，将数字信号通过一数模转换器和另外一个将截止频率设置为奈奎斯特频率的低通滤波器。输出端的滤波器被称为<strong>重建滤波器</strong>，而且可能包括先前描述的零阶保持频率。</p>
+<p>3个典型的滤波器（贝塞尔、巴特沃斯、切比雪夫）的传输特性：</p>
+<p>我们想探究的第一个参数是<strong>截止频率的陡度</strong>。设计一个低通滤波器是为了阻塞所有超过截止频率的频率成分（阻带），而让所有低于截止频率的频率成分通过（通带）（切比雪夫 &gt; 巴特沃斯 &gt; 贝塞尔）。</p>
+<p>第二个，在整个通带上，理想低通滤波器的频率响应是平坦的（巴特沃斯最好）。</p>
+<p>最后一个评估的参数是阶跃响应，即当输入信号的电压从一个值迅速变成另外一个值的时候，滤波器将如何响应（巴特沃斯和切比雪夫滤波器都有过冲和振铃（振动幅度缓慢衰减）现象发生。与它们不同的是，贝塞尔滤波器却没有这方面的问题。）。</p>
+<h2 id="抗混叠滤波器的选择"><a href="#抗混叠滤波器的选择" class="headerlink" title="抗混叠滤波器的选择"></a>抗混叠滤波器的选择</h2><p>切比雪夫将滚降效应最优化，巴特沃斯将通带平坦度最优化，贝塞尔将阶跃响应最优化。抗混叠滤波器的选择儿乎完全取决于一个问题：要处理的信号中信息是如何表现的。许多方法可以把数据信息编码在一个模拟波形里，其中有两个方法是常用的，即时域编码和频域编码。二者在DPS领域的区别非常明显。</p>
+<p>在频域编码中，信息以正弦波形式形成信号波。音频信号就是这方面的一个很好的例子。当一个人听演讲或者音乐的时候，感觉到的声音取决于频率，而不是波形。可以用通过一个只改变正弦波的相位而不改变其频率和振幅的电路的声音信号来表明这一点，产生的信号通过示波器看起来完全不同，但声音听起来是相同的。即使波形已经被明显改变，但有用信息已经被完全保留下来。因频率混叠效应将造成不同频率成分的混淆和交叠，直接损伤频域编码数据。因此，这些信号的数字化通常会用到具有锐利截止特性的抗混叠滤波器，如切比雪夫滤波器、椭圆滤波器和巴特沃斯滤波器。这些滤波器较差的阶跃响应不会产生危害。</p>
+<p>时域编码使用波形的形状储存信息。切比雪夫滤波器通过除去所有的高频成分来处理问题。这使得一个被滤波的模拟信号能够通过抽样信号完全重建。然而，重建的模拟倌号和被滤波的模拟信号相同，而不是原始信号。虽然在抽样方面没有丢失什么信息，但是波形已经被抗混叠滤波器严重扭曲。贝塞尔滤波器，就是为解决这个问题而设计的。它的输出与原始的波形很类似，只是边缘变得光滑。</p>
+<p>通过调整滤波器的截止频率，可以滤掉高频成分从而改善倌号边沿的光滑性。增加滤波器的极点个数可以在这两个参数之间作一个更好的折中。一个通常的策略是将截止频率设置为抽样频率的四分之一，使得沿着每个上升边沿部分有两个抽样点。注意，贝塞尔和切比雪夫滤波器已经将原始信号中的高频噪声去除掉了。</p>
+<p>最后一个选择是不使用抗混叠滤波器。最大的优点是每个抽样点的值都和原始模拟信号的值相同。<br>换句话说，它有完美的边沿锐度，原始信号的变化将将完整地反映在相应的数字信号上，缺点是由于频率混叠造成信号失真。</p>
+<h2 id="多抽样率数据转换"><a href="#多抽样率数据转换" class="headerlink" title="多抽样率数据转换"></a>多抽样率数据转换</h2><p>电子学中的一个显著的趋势是用数字算法取代模拟电路。数据转换是这方面的一个很好的例子。采用更高速的抽样将具有很多优点。比较高的抽样率允许用简单的阻容(RC) 网络替代复杂的8极点滤波器。问题是，现在需要数字系统处理的，是以较高的抽样率抽样得到的数据。与此应对的是比较巧妙的多抽样率技术，即在同一系统中采用一种以上的抽样率。</p>
+<h2 id="单比特数据转换"><a href="#单比特数据转换" class="headerlink" title="单比特数据转换"></a>单比特数据转换</h2><p>略</p>
+<h1 id="DSP软件"><a href="#DSP软件" class="headerlink" title="DSP软件"></a>DSP软件</h1><h2 id="计算机的数"><a href="#计算机的数" class="headerlink" title="计算机的数"></a>计算机的数</h2><p>整数、浮点数、单精度、双精度、舍入误差、加性误差。<br>加性误差比随机误差更加严重。这是因为随机误差互相之间容易抵消，而加性误差只是单调累积。<br>加性误差大概等于单步操作中的舍入误差乘以总的操作数。想要控制或者预测一个特定的运算中将会发生哪种行为（或叫哪种误差）几乎是不可能的。<br>每个单精度数会有四十万分之一的误差，乘以数字历经的操作数。每一个双精度数字有四十亿分之一的误差，由操作数相乘而得。</p>
+<h1 id="线性系统"><a href="#线性系统" class="headerlink" title="线性系统"></a>线性系统</h1><h2 id="信号与系统"><a href="#信号与系统" class="headerlink" title="信号与系统"></a>信号与系统</h2><p><strong>信号</strong>是对一种参数如何随另一种参数的变化而变化的描述。<strong>系统</strong>是对每个输入信号都产生一个输出信号的过程。<br>命名信号有一些规则：</p>
+<ul>
+<li>连续信号使用圆括号，如x(t)，y(t); 而离散信号使用方括号，如 x[n]，y[n]。</li>
+<li>第二，信号要用小写字母，频域中使用大写字母。</li>
+<li>第三，信号的命名通常是用来描述信号所代表的参数。例如，随时间变化的电压可能被称为v(t), 每个交易日都在改变的股票市价被叫做：p[d]。</li>
+<li>第四，如果不可以用更多的描述性名称，离散系统的输入信号一般表示为x[n], 输出倌号y[n]；连续系统则用x(t)，y(t)表示。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://sdupc.top">Chao Pang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2024/07/06/dps/">http://sdupc.top/2024/07/06/dps/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Chao Pang的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">信号处理</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img class="cover" src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">现代软件开发中的模式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chao Pang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pc@sdupc.top" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个热爱古诗词和历史的 ISTJ ，欢迎来到我的个人主页~有任何问题都可以与我邮件交流！邮箱：pc@sdupc.top</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E3%80%81%E6%A6%82%E7%8E%87%E5%92%8C%E5%99%AA%E5%A3%B0"><span class="toc-number">1.</span> <span class="toc-text">统计、概率和噪声</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E4%B8%8E%E6%9B%B2%E7%BA%BF"><span class="toc-number">1.1.</span> <span class="toc-text">信号与曲线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E5%80%BC%E5%92%8C%E6%A0%87%E5%87%86%E5%81%8F%E5%B7%AE"><span class="toc-number">1.2.</span> <span class="toc-text">平均值和标准偏差</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E5%92%8C%E5%9F%BA%E6%9C%AC%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">信号和基本过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE%E3%80%81%E6%A6%82%E7%8E%87%E8%B4%A8%E9%87%8F%E5%87%BD%E6%95%B0%E5%92%8C%E6%A6%82%E7%8E%87%E5%AF%86%E5%BA%A6%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">直方图、概率质量函数和概率密度函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="toc-number">1.5.</span> <span class="toc-text">正态分布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%99%AA%E5%A3%B0%E7%9A%84%E4%BA%A7%E7%94%9F"><span class="toc-number">1.6.</span> <span class="toc-text">数字噪声的产生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%BE%E5%BA%A6%E5%92%8C%E5%87%86%E7%A1%AE%E5%BA%A6"><span class="toc-number">1.7.</span> <span class="toc-text">精度和准确度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E6%95%B0%E8%BD%AC%E6%8D%A2%E4%B8%8E%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text">模数转换与数模转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8F%E5%8C%96"><span class="toc-number">2.1.</span> <span class="toc-text">量化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%BD%E6%A0%B7%E5%AE%9A%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">抽样定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.3.</span> <span class="toc-text">数模转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E7%9A%84%E6%A8%A1%E6%8B%9F%E6%BB%A4%E6%B3%A2%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">用于数据转换的模拟滤波器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%97%E6%B7%B7%E5%8F%A0%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">2.5.</span> <span class="toc-text">抗混叠滤波器的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%8A%BD%E6%A0%B7%E7%8E%87%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.6.</span> <span class="toc-text">多抽样率数据转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E6%AF%94%E7%89%B9%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.7.</span> <span class="toc-text">单比特数据转换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DSP%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">DSP软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">计算机的数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.</span> <span class="toc-text">线性系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.1.</span> <span class="toc-text">信号与系统</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/06/dps/" title="数字信号处理"><img src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字信号处理"/></a><div class="content"><a class="title" href="/2024/07/06/dps/" title="数字信号处理">数字信号处理</a><time datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="现代软件开发中的模式"/></a><div class="content"><a class="title" href="/2024/03/28/software_design/" title="现代软件开发中的模式">现代软件开发中的模式</a><time datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ChatGPT的流式输出"/></a><div class="content"><a class="title" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出">ChatGPT的流式输出</a><time datetime="2024-03-16T06:29:48.000Z" title="发表于 2024-03-16 14:29:48">2024-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python编写规范PEP8"/></a><div class="content"><a class="title" href="/2024/02/14/pep8/" title="Python编写规范PEP8">Python编写规范PEP8</a><time datetime="2024-02-14T06:54:36.000Z" title="发表于 2024-02-14 14:54:36">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理"><img src="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识与推理"/></a><div class="content"><a class="title" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理">知识与推理</a><time datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Chao Pang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

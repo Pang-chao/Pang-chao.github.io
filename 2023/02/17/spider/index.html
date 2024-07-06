@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>爬虫逆向技术 | Chao Pang的个人主页</title><meta name="author" content="Chao Pang"><meta name="copyright" content="Chao Pang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="逆向介绍爬虫，就是在网络上自动抓取自己所需要的内容。很多人认为，爬虫技术主要是要学怎么去爬取内容，但其实，单纯的爬取网页内容（针对不设防的网站）非常简单，用Python几十行即可搞定。但理想很丰满，现实很骨感。实际上，不设防的网站少之又少，大部分信息重要程度很高的网站都有很难突破的加密与保护措施，比如常见的各种验证码。所以，学习爬虫更重要的是如何绕过网站&#x2F;APP内的反爬虫措施，从而顺利得">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫逆向技术">
+<meta property="og:url" content="http://sdupc.top/2023/02/17/spider/index.html">
+<meta property="og:site_name" content="Chao Pang的个人主页">
+<meta property="og:description" content="逆向介绍爬虫，就是在网络上自动抓取自己所需要的内容。很多人认为，爬虫技术主要是要学怎么去爬取内容，但其实，单纯的爬取网页内容（针对不设防的网站）非常简单，用Python几十行即可搞定。但理想很丰满，现实很骨感。实际上，不设防的网站少之又少，大部分信息重要程度很高的网站都有很难突破的加密与保护措施，比如常见的各种验证码。所以，学习爬虫更重要的是如何绕过网站&#x2F;APP内的反爬虫措施，从而顺利得">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/10/20/vhEHoTkyeqpzu2M.png">
+<meta property="article:published_time" content="2023-02-17T02:08:35.000Z">
+<meta property="article:modified_time" content="2024-07-06T07:03:35.524Z">
+<meta property="article:author" content="Chao Pang">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/10/20/vhEHoTkyeqpzu2M.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2023/02/17/spider/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '爬虫逆向技术',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-06 15:03:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/10/20/vhEHoTkyeqpzu2M.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Chao Pang的个人主页"><span class="site-name">Chao Pang的个人主页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">爬虫逆向技术</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-17T02:08:35.000Z" title="发表于 2023-02-17 10:08:35">2023-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T07:03:35.524Z" title="更新于 2024-07-06 15:03:35">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="爬虫逆向技术"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="逆向介绍"><a href="#逆向介绍" class="headerlink" title="逆向介绍"></a>逆向介绍</h1><p>爬虫，就是在网络上自动抓取自己所需要的内容。很多人认为，爬虫技术主要是要学怎么去爬取内容，但其实，单纯的爬取网页内容（针对不设防的网站）非常简单，用Python几十行即可搞定。但理想很丰满，现实很骨感。实际上，不设防的网站少之又少，大部分信息重要程度很高的网站都有很难突破的加密与保护措施，比如常见的各种验证码。所以，学习爬虫更重要的是如何绕过网站&#x2F;APP内的反爬虫措施，从而顺利得到我们想要的数据。这个过程就是逆向。</p>
+<p>另外，提到爬虫，很多人都会问：“写这玩意是不是容易坐牢？”。确实，爬虫这种东西本身就带了一种“不太道德”的色彩，很多网站也是深受其扰。但对于个人开发者而言，只要做的不太过分，适当的爬取内容，一般公司也不会针对个人发起诉讼。“不谈剂量谈毒性就是耍流氓”。大家掌握好一个度就可以了。</p>
+<h1 id="Python爬虫常用工具"><a href="#Python爬虫常用工具" class="headerlink" title="Python爬虫常用工具"></a>Python爬虫常用工具</h1><h2 id="在线工具"><a href="#在线工具" class="headerlink" title="在线工具"></a>在线工具</h2><table>
+<thead>
+<tr>
+<th>链接</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://spidertools.cn/">https://spidertools.cn</a></td>
+<td>爬虫工具库</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.json.cn/">https://www.json.cn</a></td>
+<td>Json解析网站</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://base64.us/">https://base64.us</a></td>
+<td>Base64编码解码</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/runcode">https://www.runoob.com/runcode</a></td>
+<td>HTML代码转页面</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://alisen39.com/">https://alisen39.com</a></td>
+<td>HTTPRaw转Python</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://httpbin.org/get">http://httpbin.org/get</a></td>
+<td>查看本地请求信息</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://tool.chinaz.com/tools/unicode.aspx">http://tool.chinaz.com/tools/unicode.aspx</a></td>
+<td>站长工具编码解码集合</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://web.chacuo.net/netproxycheck">http://web.chacuo.net/netproxycheck</a></td>
+<td>代理服务器连接测试工具</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://tool.yuanrenxue.com/">http://tool.yuanrenxue.com</a></td>
+<td>爬虫分析工具</td>
+</tr>
+</tbody></table>
+<h2 id="工具库"><a href="#工具库" class="headerlink" title="工具库"></a>工具库</h2><h3 id="Urllib"><a href="#Urllib" class="headerlink" title="Urllib"></a>Urllib</h3><p>urllib3是python的一个扩展库，可以帮助我们安全而方便的发送网页请求。</p>
+<h3 id="BeautifulSoup"><a href="#BeautifulSoup" class="headerlink" title="BeautifulSoup"></a>BeautifulSoup</h3><p>BeautifulSoup是python的一个库，其提供一些简单的、python式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。</p>
+<p>BeautifulSoup4和lxml一样，BeautifulSoup也是一个HTML&#x2F;XML的解析器，主要的功能也是如何解析和提取HTML&#x2F;XML数据。</p>
+<p>BeautifulSoup自动将输入文档转换为Unicode编码，输出文档转换为utf-8编码。BeautifulSoup支持Python标准库中的HTML解析器,还支持一些第三方的解析器。</p>
+<h3 id="Scrapy"><a href="#Scrapy" class="headerlink" title="Scrapy"></a>Scrapy</h3><p>Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应用框架。 可以应用在包括数据挖掘，信息处理或存储历史数据等一系列的程序中。</p>
+<p>其最初是为了页面抓取（更确切来说，网络抓取 ）所设计的， 也可以应用在获取API所返回的数据（例如 Amazon Associates Web Services ） 或者通用的网络爬虫。</p>
+<p>它的架构如下：</p>
+<h4 id="1-Scrapy-Engine"><a href="#1-Scrapy-Engine" class="headerlink" title="1. Scrapy Engine"></a>1. Scrapy Engine</h4><p>引擎负责控制数据流在系统中所有组件中流动，并在相应动作发生时触发事件。 详细内容查看下面的数据流（Data Flow）部分。此组件相当于爬虫的“大脑”，是整个爬虫的调度中心。</p>
+<h4 id="2-调度器-Scheduler"><a href="#2-调度器-Scheduler" class="headerlink" title="2. 调度器 Scheduler"></a>2. 调度器 Scheduler</h4><p>调度器从引擎接受request并将他们入队，以便之后引擎请求他们时提供给引擎。</p>
+<p>初始的爬取URL和后续在页面中获取的待爬取的URL将放入调度器中，等待爬取。同时调度器会自动去除重复的URL（如果特定的URL不需要去重也可以通过设置实现，如post请求的URL）</p>
+<h4 id="3-下载器-Downloader"><a href="#3-下载器-Downloader" class="headerlink" title="3. 下载器 Downloader"></a>3. 下载器 Downloader</h4><p>下载器负责获取页面数据并提供给引擎，而后提供给spider。</p>
+<h4 id="4-Spiders"><a href="#4-Spiders" class="headerlink" title="4. Spiders"></a>4. Spiders</h4><p>Spider是Scrapy用户编写用于分析response并提取item（即获取到的item）或额外跟进的URL的类。 每个spider负责处理一个特定（或一些）网站。</p>
+<h4 id="5-Item-Pipeline"><a href="#5-Item-Pipeline" class="headerlink" title="5. Item Pipeline"></a>5. Item Pipeline</h4><p>Item Pipeline负责处理被spider提取出来的item。典型的处理有清理、 验证及持久化（例如存取到数据库中）。</p>
+<p>当页面被爬虫解析所需的数据存入Item后，将被发送到项目管道（Pipeline），并经过几个特定的次序处理数据，最后存入本地文件或存入数据库。</p>
+<h4 id="6-下载器中间件"><a href="#6-下载器中间件" class="headerlink" title="6. 下载器中间件"></a>6. 下载器中间件</h4><p>下载器中间件是在引擎及下载器之间的特定钩子（specific hook），处理Downloader传递给引擎的response。 其提供了一个简便的机制，通过插入自定义代码来扩展Scrapy功能。通过设置下载器中间件可以实现爬虫自动更换user-agent、IP等功能。</p>
+<h4 id="7-Spider中间件"><a href="#7-Spider中间件" class="headerlink" title="7. Spider中间件"></a>7. Spider中间件</h4><p>Spider中间件是在引擎及Spider之间的特定钩子（specific hook），处理spider的输入（response）和输出（items及requests）。 其提供了一个简便的机制，通过插入自定义代码来扩展Scrapy功能。</p>
+<h4 id="8-数据流-Data-flow"><a href="#8-数据流-Data-flow" class="headerlink" title="8. 数据流 Data flow"></a>8. 数据流 Data flow</h4><ol>
+<li>引擎打开一个网站（open a domain），找到处理该网站的Spider并向该spider请求第一个要爬取的URL（s）。</li>
+<li>引擎从Spider中获取到第一个要爬取的URL并在调度器（Scheduler）以Request调度。</li>
+<li>引擎向调度器请求下一个要爬取的URL。</li>
+<li>调度器返回下一个要爬取的URL给引擎，引擎将URL通过下载中间件（请求（request）方向）转发给下载器（Downloader）。</li>
+<li>一旦页面下载完毕，下载器生成一个该页面的Response，并将其通过下载中间件（返回（response）方向）发送给引擎。</li>
+<li>引擎从下载器中接收到Response并通过Spider中间件（输入方向）发送给Spider处理。</li>
+<li>Spider处理Response并返回爬取到的Item及（跟进的）新的Request给引擎。</li>
+<li>引擎将（Spider返回的）爬取到的Item给Item Pipeline，将（Spider返回的）Request给调度器。</li>
+<li>（从第二步）重复直到调度器中没有更多地request，引擎关闭该网站。</li>
+</ol>
+<h2 id="代理IP工具"><a href="#代理IP工具" class="headerlink" title="代理IP工具"></a>代理IP工具</h2><h3 id="Proxy-pool"><a href="#Proxy-pool" class="headerlink" title="Proxy_pool"></a>Proxy_pool</h3><p>Github：<a target="_blank" rel="noopener" href="https://github.com/jhao104/proxy_pool">https://github.com/jhao104/proxy_pool</a></p>
+<p>爬虫代理IP池项目,主要功能为定时采集网上发布的免费代理验证入库，定时验证入库的代理保证代理的可用性，提供API和CLI两种使用方式。同时也可以扩展代理源以增加代理池IP的质量和数量。</p>
+<h1 id="Web-Js-逆向"><a href="#Web-Js-逆向" class="headerlink" title="Web Js 逆向"></a>Web Js 逆向</h1><p>在前后端分离的开发方式中，为保证接口调用时的数据安全性，也为了防止请求参数被篡改，大多数接口都进行了请求签名、身份认证、动态Cookie等机制。另外部分网站对返回的数据也会进行加密。</p>
+<p>这些加密参数的生成方法都是由Js来控制的，如果想直接从接口获取数据，就要去分析调试JavaScript的调用逻辑、堆栈调用关系来弄清网站加密的实现方法。</p>
+<h2 id="Js作用域"><a href="#Js作用域" class="headerlink" title="Js作用域"></a>Js作用域</h2><p>Js作用域分为三种：全局作用域，函数作用域，块级作用域。</p>
+<h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p>最外层函数和在最外层函数外面定义的变量拥有全局作用域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> outName = <span class="string">&#x27;我是最外层变量&#x27;</span> <span class="comment">//最外层变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outFun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//最外层函数</span></span><br><span class="line">  <span class="keyword">var</span> inVar = <span class="string">&#x27;内层变量&#x27;</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">innerFun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//内层函数</span></span><br><span class="line">    <span class="built_in">console</span>.log(inVar) <span class="comment">//内层变量</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">window</span>.inVar) <span class="comment">//undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">  innerFun()</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(outName === <span class="built_in">window</span>.outName) <span class="comment">//我是最外层变量</span></span><br><span class="line">outFun() <span class="comment">//内层变量</span></span><br><span class="line"><span class="built_in">console</span>.log(inVar) <span class="comment">//inVar is not defined</span></span><br><span class="line">innerFun() <span class="comment">//innerFun is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>所有未定义直接赋值的变量自动声明为拥有全局作用域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outFun</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  variable = <span class="string">&#x27;未定义直接赋值的变量&#x27;</span></span><br><span class="line">  <span class="keyword">var</span> inVariable2 = <span class="string">&#x27;内层变量2&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">outFun() <span class="comment">//要先执行这个函数，否则根本不知道里面是啥</span></span><br><span class="line"><span class="built_in">console</span>.log(variable === <span class="built_in">window</span>.variable) <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(inVariable2) <span class="comment">//inVariable2 is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>所有 window 对象的属性拥有全局作用域。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//全局作用域弊端:会造成污染全局命名空间, 容易引起命名冲突</span></span><br><span class="line"><span class="comment">// 张三写的代码中</span></span><br><span class="line"><span class="keyword">var</span> data = &#123; <span class="attr">a</span>: <span class="number">100</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 李四写的代码中</span></span><br><span class="line"><span class="keyword">var</span> data = &#123; <span class="attr">x</span>: <span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h3><p>函数内部定义的变量</p>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>if 和 switch 的条件语句或 for 和 while 的循环语句中。</p>
+<p>也可通过新增的let和const声明。</p>
+<h2 id="窗口对象属性"><a href="#窗口对象属性" class="headerlink" title="窗口对象属性"></a>窗口对象属性</h2><p>很多环境监测都是基于浏览器window的属性和方法。</p>
+<h3 id="Window"><a href="#Window" class="headerlink" title="Window"></a>Window</h3><p>Window对象表示浏览器当前打开的窗口。</p>
+<p>未完待续…</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://sdupc.top">Chao Pang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2023/02/17/spider/">http://sdupc.top/2023/02/17/spider/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Chao Pang的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/10/20/vhEHoTkyeqpzu2M.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/21/effective_python/" title="《Effective Python》总结"><img class="cover" src="https://s2.loli.net/2023/09/17/8fUOFNuDGX1lnhJ.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">《Effective Python》总结</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/23/adobe_illustrator/" title="Illustrator——一款非常好用的科研绘图软件"><img class="cover" src="https://s2.loli.net/2023/10/06/rfQTDnBqSd7XZpF.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Illustrator——一款非常好用的科研绘图软件</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chao Pang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pc@sdupc.top" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个热爱古诗词和历史的 ISTJ ，欢迎来到我的个人主页~有任何问题都可以与我邮件交流！邮箱：pc@sdupc.top</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%86%E5%90%91%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">逆向介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E7%88%AC%E8%99%AB%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">2.</span> <span class="toc-text">Python爬虫常用工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.</span> <span class="toc-text">在线工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%BA%93"><span class="toc-number">2.2.</span> <span class="toc-text">工具库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Urllib"><span class="toc-number">2.2.1.</span> <span class="toc-text">Urllib</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BeautifulSoup"><span class="toc-number">2.2.2.</span> <span class="toc-text">BeautifulSoup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scrapy"><span class="toc-number">2.2.3.</span> <span class="toc-text">Scrapy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Scrapy-Engine"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">1. Scrapy Engine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%B0%83%E5%BA%A6%E5%99%A8-Scheduler"><span class="toc-number">2.2.3.2.</span> <span class="toc-text">2. 调度器 Scheduler</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%8B%E8%BD%BD%E5%99%A8-Downloader"><span class="toc-number">2.2.3.3.</span> <span class="toc-text">3. 下载器 Downloader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Spiders"><span class="toc-number">2.2.3.4.</span> <span class="toc-text">4. Spiders</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Item-Pipeline"><span class="toc-number">2.2.3.5.</span> <span class="toc-text">5. Item Pipeline</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E4%B8%8B%E8%BD%BD%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">2.2.3.6.</span> <span class="toc-text">6. 下载器中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-Spider%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">2.2.3.7.</span> <span class="toc-text">7. Spider中间件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E6%95%B0%E6%8D%AE%E6%B5%81-Data-flow"><span class="toc-number">2.2.3.8.</span> <span class="toc-text">8. 数据流 Data flow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86IP%E5%B7%A5%E5%85%B7"><span class="toc-number">2.3.</span> <span class="toc-text">代理IP工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Proxy-pool"><span class="toc-number">2.3.1.</span> <span class="toc-text">Proxy_pool</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Js-%E9%80%86%E5%90%91"><span class="toc-number">3.</span> <span class="toc-text">Web Js 逆向</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Js%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.1.</span> <span class="toc-text">Js作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.1.1.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.1.2.</span> <span class="toc-text">函数作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.1.3.</span> <span class="toc-text">块级作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="toc-number">3.2.</span> <span class="toc-text">窗口对象属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Window"><span class="toc-number">3.2.1.</span> <span class="toc-text">Window</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/06/dps/" title="数字信号处理"><img src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字信号处理"/></a><div class="content"><a class="title" href="/2024/07/06/dps/" title="数字信号处理">数字信号处理</a><time datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="现代软件开发中的模式"/></a><div class="content"><a class="title" href="/2024/03/28/software_design/" title="现代软件开发中的模式">现代软件开发中的模式</a><time datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ChatGPT的流式输出"/></a><div class="content"><a class="title" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出">ChatGPT的流式输出</a><time datetime="2024-03-16T06:29:48.000Z" title="发表于 2024-03-16 14:29:48">2024-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python编写规范PEP8"/></a><div class="content"><a class="title" href="/2024/02/14/pep8/" title="Python编写规范PEP8">Python编写规范PEP8</a><time datetime="2024-02-14T06:54:36.000Z" title="发表于 2024-02-14 14:54:36">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理"><img src="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识与推理"/></a><div class="content"><a class="title" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理">知识与推理</a><time datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Chao Pang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

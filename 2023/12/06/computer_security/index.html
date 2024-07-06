@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机安全概述 | Chao Pang的个人主页</title><meta name="author" content="Chao Pang"><meta name="copyright" content="Chao Pang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对称加密也被称为常规加密或单密钥加密。其安全使用的两个要求：1. 需要一个强加密算法，2. 发送者和接收方必须以一种安全的方式获得了密钥的副本，并且必须保持密钥的安全。 对应的攻击方式：  密码分析攻击： 依赖：算法的性质，一些了解明文的一般特征，一些样本明文密文对。利用算法的特征试图推断特定的明文或正在使用的密钥。如果成功，所有用该密钥加密的消息都会被破坏。  暴力攻击： 在密文上尝试所有可能的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机安全概述">
+<meta property="og:url" content="http://sdupc.top/2023/12/06/computer_security/index.html">
+<meta property="og:site_name" content="Chao Pang的个人主页">
+<meta property="og:description" content="对称加密也被称为常规加密或单密钥加密。其安全使用的两个要求：1. 需要一个强加密算法，2. 发送者和接收方必须以一种安全的方式获得了密钥的副本，并且必须保持密钥的安全。 对应的攻击方式：  密码分析攻击： 依赖：算法的性质，一些了解明文的一般特征，一些样本明文密文对。利用算法的特征试图推断特定的明文或正在使用的密钥。如果成功，所有用该密钥加密的消息都会被破坏。  暴力攻击： 在密文上尝试所有可能的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/12/06/8kuCgIMOAa9X4JL.png">
+<meta property="article:published_time" content="2023-12-06T09:10:45.000Z">
+<meta property="article:modified_time" content="2024-07-06T07:03:35.520Z">
+<meta property="article:author" content="Chao Pang">
+<meta property="article:tag" content="CS安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/12/06/8kuCgIMOAa9X4JL.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2023/12/06/computer_security/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机安全概述',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-06 15:03:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/12/06/8kuCgIMOAa9X4JL.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Chao Pang的个人主页"><span class="site-name">Chao Pang的个人主页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">计算机安全概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-06T09:10:45.000Z" title="发表于 2023-12-06 17:10:45">2023-12-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T07:03:35.520Z" title="更新于 2024-07-06 15:03:35">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="计算机安全概述"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h1><p>也被称为常规加密或单密钥加密。其安全使用的两个要求：1. 需要一个强加密算法，2. 发送者和接收方必须以一种安全的方式获得了密钥的副本，并且必须保持密钥的安全。</p>
+<p>对应的攻击方式：</p>
+<ul>
+<li><p>密码分析攻击：</p>
+<p>依赖：算法的性质，一些了解明文的一般特征，一些样本明文密文对。利用算法的特征试图推断特定的明文或正在使用的密钥。如果成功，所有用该密钥加密的消息都会被破坏。</p>
+</li>
+<li><p>暴力攻击：</p>
+<p>在密文上尝试所有可能的密钥，直到得到一个有意义的明文。</p>
+</li>
+</ul>
+<p>常见加密算法：</p>
+<ul>
+<li>Data Encryption Standard (DES)</li>
+<li>Triple DES (3DES)</li>
+<li>Advanced Encryption Standard (AES)</li>
+</ul>
+<p>常见对称加密模式：</p>
+<ul>
+<li><p>ECB</p>
+<p>全称：Electronic codebook，即电子密码本。需要将待加密消息按照对应算法分组的要求分成若干块，并对每个块进行独立加密</p>
+<p>优点：ECB模块可以并行处理数据。</p>
+<p>缺点：同样原文生成同样的密文，并不能很好地保护数据。</p>
+<p>同时加密，如果原文一样，加密出来的密文也是一样的，因为它们的加密密钥key都是一样的。</p>
+</li>
+<li><p>CBC</p>
+<p>全称：Cipher Block Chaining，密文分组链接模式，之所以叫这个名字，是因为密文分组像链条一样互相连接在一起。</p>
+<p>在CBC模式中，首先将明文分组和一个密文分组进行异或（XOR）运算，然后再进行加密。初始化向量IV长度与明文分组长度相同，在这种方法中，每个密文块都依赖与它前边的所有明文块。</p>
+<p>优点：同样的原文生成的密文不一样。</p>
+<p>缺点：串行处理数据，使得加密速度很慢。</p>
+</li>
+<li><p>消息认证 (Message Authentication)</p>
+<p>是一个证实收到的消息来自可信的源点且未被篡改的过程。</p>
+<p>鉴别的目的：</p>
+<p>第一，验证信息的发送者是真正的，而不是冒充的，此为信源识别；</p>
+<p>第二，验证信息的完整性，在传送或存储过程中未被篡改，重放或延迟等。</p>
+</li>
+</ul>
+<h1 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h1><p>是指一对加密密钥与解密密钥，这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。</p>
+<p>如果加密密钥是公开的，这用于客户给私钥所有者上传加密的数据，这被称作为公开密钥加密(狭义)。例如，网络银行的客户发给银行网站的账户操作的加密数据。</p>
+<p>如果解密密钥是公开的，用私钥加密的信息，可以用公钥对其解密，用于客户验证持有私钥一方发布的数据或文件是完整准确的，接收者由此可知这条信息确实来自于拥有私钥的某人，这被称作数字签名，公钥的形式就是数字证书。例如，从网上下载的安装程序，一般都带有程序制作者的数字签名，可以证明该程序的确是该作者（公司）发布的而不是第三方伪造的且未被篡改过(身份认证&#x2F;验证)。</p>
+<p>常用算法有RSA加密算法（基于大数的质因数分解的困难性），ECC加密算法（基于椭圆曲线离散对数问题的困难性）。</p>
+<h1 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h1><p>验证用户身份的四个因素是基于：</p>
+<ul>
+<li><p>只有用户自己知道的一些事情</p>
+<p>密码，密码，对预先安排好的问题的答案</p>
+</li>
+<li><p>用户个人拥有的东西（token）</p>
+<p>智能卡，电子钥匙卡，物理钥匙</p>
+</li>
+<li><p>个体的特征（静态生物识别学）</p>
+<p>指纹，虹膜，人脸识别</p>
+</li>
+<li><p>用户个人所做的事情（动态生物识别学）</p>
+<p>声音模式，笔迹，打字节奏</p>
+</li>
+</ul>
+<p>可以多种验证因素同时使用。</p>
+<p>用户密码不能以明文存储，应该在加盐后进行哈希加密，再存储在数据库中。</p>
+<h1 id="访问控制策略"><a href="#访问控制策略" class="headerlink" title="访问控制策略"></a>访问控制策略</h1><h2 id="自主访问控制（DAC）"><a href="#自主访问控制（DAC）" class="headerlink" title="自主访问控制（DAC）"></a>自主访问控制（DAC）</h2><p>自主访问控制（Discretionary Access Control, DAC）：是一种最为普遍的访问控制手段，是指对某个客体具有拥有权（或控制权）的主体能够将对该客体的一种访问权或多种访问权自主地授予其它主体，并随时可以将这些权限回收。</p>
+<p>所谓自主就是指具有某种访问权力的主体能够自己决定是否将访问权限授予其他主体。</p>
+<p>特点：根据主体的身份和授权来决定访问模式。</p>
+<p>缺点：安全性差；用户数量多时，访问控制策略会很庞大；修改麻烦。</p>
+<h2 id="强制访问控制"><a href="#强制访问控制" class="headerlink" title="强制访问控制"></a>强制访问控制</h2><p>强制访问控制（Mandatory Access Control，MAC）：系统对所有主体及其所控制的客体（进程、文件、段、设备等）指定敏感标记，系统根据主体和客体的敏感标记来决定访问模式。敏感标记一般由密级和范畴组成。</p>
+<p>优点：简单性；容易与BLP模型结合（在标记中增加完整性标记）。</p>
+<p>缺点：完整性标签确定的困难性；实施的复杂性。</p>
+<h2 id="基于角色的访问控制"><a href="#基于角色的访问控制" class="headerlink" title="基于角色的访问控制"></a>基于角色的访问控制</h2><p>基于角色的访问控制（Role-Based Access Control，RBAC）的基本思想是：根据用户担任的角色来确定用户在系统中的访问权限。一个用户必须扮演某种角色，还必须激活这一角色，才能对一个客体进行访问或执行某种操作。</p>
+<p>RBAC的基本概念 ：</p>
+<ul>
+<li>用户（User）：访问计算机资源的主体。用户集合为 U。</li>
+<li>角色（Role）：代表一种资格。角色集合为 R.</li>
+<li>权限（Permission）：对客体的操作权力。权限集合为 P.</li>
+<li>用户分配（User Assignment）：将用户与角色关联。用户分配集合为UA&#x3D;{(u,r)|u∈U, r∈R} 。用户u与角色r关联后，将拥有r的权限。</li>
+<li>权限分配（Permission Assignm）：将角色与权限关联。权限分配集合为PA&#x3D;{(p,r)|p∈P, r∈R} 。权限 p与角色 r关联后，角色 r将拥有权限 p。</li>
+<li>激活角色（Active Role）：角色只有激活才能起作用。通过会话激活角色。角色激活要满足安全约束。</li>
+<li>会话（Session）：用户要访问系统资源时，必须先建立一个会话。一次会话只对应一个用户，一次会话可激活多个角色。</li>
+</ul>
+<p>RBAC的基本机制：</p>
+<p>授权机制：</p>
+<ul>
+<li>分为两步：将权限分配给角色（权限分配）将角色分配给用户（用户分配）。</li>
+<li>授权要满足安全约束条件。</li>
+<li>角色分级，高级角色可继承低级角色的访问权限。</li>
+</ul>
+<p>用户与角色的关系（多对多）</p>
+<ul>
+<li>一个用户可担任多个角色</li>
+<li>一个角色可分配给多个用户</li>
+</ul>
+<p>角色和权限的关系（多对多）</p>
+<ul>
+<li><p>一个角色可拥有多个权限</p>
+</li>
+<li><p>一个权限可分配给多个角色</p>
+</li>
+</ul>
+<p>角色和角色的关系（分级关系）</p>
+<ul>
+<li><p>直接继承：相邻角色之间的继承</p>
+</li>
+<li><p>间接继承：非相邻角色之间的继承</p>
+</li>
+</ul>
+<p>安全约束</p>
+<ul>
+<li><p>职责分离约束：合理划分任务和相关权限，以保证多用户协同工作的安全性。</p>
+</li>
+<li><p>角色互斥约束：如果一组角色是互斥的，那么一个用户或同一个访问权限只能被分配给其中的一个角色。利用角色互斥约束可实现职责分离。</p>
+</li>
+<li><p>最小特权约束：只给角色分配完成某工作所需的最小权力。</p>
+</li>
+<li><p>角色激活约束：</p>
+<p>激活数约束：限制一个角色同时授权和激活的数量。</p>
+<p>激活时间约束：限制一个角色激活的时间。</p>
+</li>
+</ul>
+<p>优缺点：</p>
+<p>优点：便于授权管理；增强了安全性；便于工作分级；便于任务分担。</p>
+<p>缺点：复杂的权限校验，对性能有一定影响。</p>
+<h2 id="基于属性的访问控制"><a href="#基于属性的访问控制" class="headerlink" title="基于属性的访问控制"></a>基于属性的访问控制</h2><p>它评估属性（或特征）而不是角色来确定访问权限。ABAC 的目的是保护数据、网络设备和 IT 资源等对象免遭未经授权的用户和操作。</p>
+<p>属性是访问事件中涉及的组件的特征或值。基于属性的访问控制根据规则分析这些组件的属性。这些规则定义了授权哪些属性组合，以便主体能够成功地对对象执行操作。</p>
+<p>根据属性在环境中的交互方式，每个ABAC解决方案都可以在环境中评估它们，并执行规则和关系。策略考虑属性来定义允许或不允许哪些访问条件。</p>
+<h1 id="数据库安全"><a href="#数据库安全" class="headerlink" title="数据库安全"></a>数据库安全</h1><h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>基于网络的最普遍和最危险的安全威胁之一，旨在利用Web应用程序页面的特性，向数据库服务器发送恶意的SQL命令。SQL注入攻击是通过操作输入来修改SQL语句，用以达到执行代码对web服务器进行攻击的方法。简单的说就是在post&#x2F;getweb表单、输入域名或页面请求的查询字符串中插入SQL命令，最终使web服务器执行恶意命令的过程。可以通过一个例子简单说明SQL注入攻击。假设某网站页面显示时URL为<a target="_blank" rel="noopener" href="http://www.example.com/?test=123">http://www.example.com?test=123</a>，此时URL实际向服务器传递了值为123的变量test，这表明当前页面是对数据库进行动态查询的结果。由此，我们可以在URL中插入恶意的SQL语句并进行执行。另外，在网站开发过程中，开发人员使用动态字符串构造SQL语句，用来创建所需的应用，这种情况下SQL语句在程序的执行过程中被动态的构造使用，可以根据不同的条件产生不同的SQL语句，比如需要根据不同的要求来查询数据库中的字段。这样的开发过程其实为SQL注入攻击留下了很多的可乘之机。</p>
+<p>攻击手法：</p>
+<ul>
+<li><p>基于布尔的盲注</p>
+<p>因为web的页面返回值都是True或者False，所以布尔盲注就是注入后根据页面返回值来得到数据库信息的一种办法。</p>
+</li>
+<li><p>基于时间的盲注</p>
+<p>当布尔型注入没有结果（页面显示正常）的时候，我们很难判断注入的代码是否被执行，也可以说到底这个注入点存不存在？这个时候布尔型注入就无法发挥自己的作用了。基于时间的盲注便应运而生，所谓基于时间的盲注，就是我们根据web页面相应的时间差来判断该页面是否存在SQL注入点。</p>
+</li>
+<li><p>联合查询注入</p>
+<p>使用联合查询进行注入的前提是我们要进行注入的页面必须有显示位。所谓联合查询注入即是使用union合并两个或多个SELECT语句的结果集，所以两个及以上的select必须有相同列、且各列的数据类型也都相同。联合查询注入可在链接最后添加order by 9基于随意数字的注入，根据页面的返回结果来判断站点中的字段数目。</p>
+</li>
+<li><p>基于错误信息的注入</p>
+<p>此方法是在页面没有显示位，但是echo mysql_error();函数输出了错误信息的时候方能使用。优点是注入速度快，缺点是语句较为复杂，而且只能用limit依次进行猜解。总体来说，报错注入其实是一种公式化的注入方法，主要用于在页面中没有显示位，但是用echo mysql_error();输出了错误信息时使用。</p>
+</li>
+</ul>
+<h1 id="恶意软件"><a href="#恶意软件" class="headerlink" title="恶意软件"></a>恶意软件</h1><p>病毒&#x2F;蠕虫&#x2F;木马等。</p>
+<p>攻击方式：</p>
+<ul>
+<li><p>水坑攻击（Watering Hole Attack）</p>
+<p>是一种网络攻击方法，其名称来源于自然界的捕食方式。攻击者会通过前期的调查或各种社会工程手段，分析被攻击者的网络活动规律，确定被攻击者（往往是一个特定群体）经常访问的一些网站，并在网站上部署恶意程序，等待被攻击者来访时实施攻击，当受害者访问被部署了恶意程序的网站时即会被感染。此类攻击行为类似于：捕食者埋伏在水里或者水坑周围，等其他动物前来喝水时发起攻击猎取食物。</p>
+</li>
+<li><p>恶意广告</p>
+<p>一种透过广告来达成恶意攻击的手法，而以狭义而言，会因不同的攻击策略而有不同的定位。但主要的目的，都是希望不被受害者察觉异状，进而能够散播恶意软件。</p>
+</li>
+<li><p>点击劫持</p>
+<p>点击劫持是一种视觉上的欺骗手段。攻击者使用一个透明的，不可见的iframe，覆盖在一个网页上，然后诱导使用户在该网页上进行操作，此时用户将在不知情的情况下点击透明的iframe页面。通过调整iframe页面的位置，可以诱导用户恰巧点击在iframe页面的一些功能性按键上。（也可以是图片或者其他方式）</p>
+</li>
+<li><p>社会工程学</p>
+<p>社会工程学指的是通过与他人的合法地交流，来使其心理受到影响，做出某些动作或者是透露一些机密信息的方式。这通常被认为是一种欺诈他人以收集信息、行骗和入侵计算机系统的行为。</p>
+</li>
+</ul>
+<h1 id="软件漏洞"><a href="#软件漏洞" class="headerlink" title="软件漏洞"></a>软件漏洞</h1><p>常见软件漏洞：</p>
+<ul>
+<li>程序员经常对输入的最大预期大小进行假设。分配的缓冲区大小没有被确认，从而导致缓冲区溢出。测试可能无法识别漏洞。测试输入不太可能包含足够大的输入来触发溢出。应该将所有输入视为危险输入。</li>
+<li>程序输入可以是二进制或文本二进制解释，通常是特定于应用程序的。使用的字符集越来越多，需要注意识别使用哪个字符集和读取哪些字符。验证失败可能会导致一个可利用的漏洞。2014 Heartbleed OpenSSL bug是一个检查二进制输入值的有效性失败的示例。</li>
+<li>跨站点脚本（XSS）攻击。由一个用户提供的输入随后被输出到另一个用户的攻击。XSS反射漏洞攻击者在提供给站点的数据中包含恶意脚本内容。</li>
+<li>跨站请求伪造（英语：Cross-site request forgery），通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的Web应用程序上执行非本意的操作的攻击方法。跟跨网站脚本（XSS）相比，XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并运行一些操作（如发邮件，发消息，甚至财产操作如转账和购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了web中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。</li>
+</ul>
+<h1 id="WEB安全"><a href="#WEB安全" class="headerlink" title="WEB安全"></a>WEB安全</h1><p>HTTPS （全称：Hypertext Transfer Protocol Secure），是以安全为目标的 HTTP 通道，在HTTP的基础上通过传输加密和身份认证保证了传输过程的安全性。HTTPS 在HTTP 的基础下加入SSL，HTTPS 的安全基础是 SSL，因此加密的详细内容就需要 SSL。</p>
+<p>HTTP虽然使用极为广泛, 但是却存在不小的安全缺陷, 主要是其数据的明文传送和消息完整性检测的缺乏, 而这两点恰好是网络支付, 网络交易等新兴应用中安全方面最需要关注的。</p>
+<p>关于 HTTP的明文数据传输, 攻击者最常用的攻击手法就是网络嗅探, 试图从传输过程当中分析出敏感的数据, 例如管理员对 Web 程序后台的登录过程等等, 从而获取网站管理权限, 进而渗透到整个服务器的权限。即使无法获取到后台登录信息, 攻击者也可以从网络中获取普通用户的隐秘信息, 包括手机号码, 身份证号码, 信用卡号等重要资料, 导致严重的安全事故。进行网络嗅探攻击非常简单, 对攻击者的要求很低。使用网络发布的任意一款抓包工具, 一个新手就有可能获取到大型网站的用户信息。</p>
+<p>另外,HTTP在传输客户端请求和服务端响应时, 唯一的数据完整性检验就是在报文头部包含了本次传输数据的长度, 而对内容是否被篡改不作确认。 因此攻击者可以轻易的发动中间人攻击, 修改客户端和服务端传输的数据, 甚至在传输数据中插入恶意代码, 导致客户端被引导至恶意网站被植入木马。</p>
+<p>HTTPS 协议是由 HTTP 加上 TLS&#x2F;SSL 协议构建的可进行加密传输、身份认证的网络协议，主要通过数字证书、加密算法、非对称密钥等技术完成互联网数据传输加密，实现互联网传输安全保护。设计目标主要有三个。</p>
+<ul>
+<li>数据保密性：保证数据内容在传输的过程中不会被第三方查看。就像快递员传递包裹一样，都进行了封装，别人无法获知里面装了什么。</li>
+<li>数据完整性：及时发现被第三方篡改的传输内容。就像快递员虽然不知道包裹里装了什么东西，但他有可能中途掉包，数据完整性就是指如果被掉包，我们能轻松发现并拒收。</li>
+<li>身份校验安全性：保证数据到达用户期望的目的地。就像我们邮寄包裹时，虽然是一个封装好的未掉包的包裹，但必须确定这个包裹不会送错地方，通过身份校验来确保送对了地方。</li>
+</ul>
+<h1 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h1><p>拒绝服务攻击（英语：denial-of-service attack，简称DoS攻击）亦称洪水攻击，是一种网络攻击手法，其目的在于使目标电脑的网络或系统资源耗尽，使服务暂时中断或停止，导致其正常用户无法访问。</p>
+<p>当黑客使用网络上两个或以上被攻陷的电脑作为“僵尸”向特定的目标发动“拒绝服务”式攻击时，称为分布式拒绝服务攻击（distributed denial-of-service attack，简称DDoS攻击）。据2014年统计，被确认为大规模DDoS的攻击已达平均每小时28次。DDoS发起者一般针对重要服务和知名网站进行攻击，如银行、信用卡支付网关、甚至根域名服务器等。</p>
+<h2 id="带宽消耗型攻击"><a href="#带宽消耗型攻击" class="headerlink" title="带宽消耗型攻击"></a>带宽消耗型攻击</h2><p>DDoS带宽消耗攻击可以分为两个不同的层次；洪泛攻击或放大攻击。洪泛攻击的特点是利用僵尸程序发送大量流量至受损的受害者系统，目的在于堵塞其宽带。放大攻击与其类似，是通过恶意放大流量限制受害者系统的宽带；其特点是利用僵尸程序通过伪造的源IP(即攻击目标IP)向某些存在漏洞的服务器发送请求，服务器在处理请求后向伪造的源IP发送应答，由于这些服务的特殊性导致应答包比请求包更长，因此使用少量的宽带就能使服务器发送大量的应答到目标主机上。</p>
+<h3 id="UDP洪水攻击（User-Datagram-Protocol-floods）"><a href="#UDP洪水攻击（User-Datagram-Protocol-floods）" class="headerlink" title="UDP洪水攻击（User Datagram Protocol floods）"></a>UDP洪水攻击（User Datagram Protocol floods）</h3><p>UDP（用户数据报协议）是一种无连接协议，当数据包通过UDP发送时，所有的数据包在发送和接收时不需要进行握手验证。当大量UDP数据包发送给受害系统时，可能会导致带宽饱和从而使得合法服务无法请求访问受害系统。遭受DDoS UDP洪泛攻击时，UDP数据包的目的端口可能是随机或指定的端口，受害系统将尝试处理接收到的数据包以确定本地运行的服务。如果没有应用程序在目标端口运行，受害系统将对源IP发出ICMP数据包，表明“目标端口不可达”。某些情况下，攻击者会伪造源IP地址以隐藏自己，这样从受害系统返回的数据包不会直接回到僵尸主机，而是被发送到被伪造地址的主机。有时UDP洪泛攻击也可能影响受害系统周围的网络连接，这可能导致受害系统附近的正常系统遇到问题。然而，这取决于网络体系结构和线速。</p>
+<h3 id="ICMP洪水攻击（ICMP-floods）"><a href="#ICMP洪水攻击（ICMP-floods）" class="headerlink" title="ICMP洪水攻击（ICMP floods）"></a>ICMP洪水攻击（ICMP floods）</h3><p>ICMP（互联网控制消息协议）洪水攻击是通过向未良好设置的路由器发送广播信息占用系统资源的做法。</p>
+<h3 id="死亡之Ping（ping-of-death）"><a href="#死亡之Ping（ping-of-death）" class="headerlink" title="死亡之Ping（ping of death）"></a>死亡之Ping（ping of death）</h3><p>死亡之Ping是产生超过IP协议能容忍的数据包数，若系统没有检查机制，就会宕机。</p>
+<h3 id="泪滴攻击"><a href="#泪滴攻击" class="headerlink" title="泪滴攻击"></a>泪滴攻击</h3><p>每个资料要发送前，该数据包都会经过切割，每个小切割都会记录位移的信息，以便重组，但此攻击模式就是捏造位移信息，造成重组时发生问题，造成错误。</p>
+<h2 id="资源消耗型攻击"><a href="#资源消耗型攻击" class="headerlink" title="资源消耗型攻击"></a>资源消耗型攻击</h2><h3 id="协议分析攻击（SYN-flood，SYN洪水）"><a href="#协议分析攻击（SYN-flood，SYN洪水）" class="headerlink" title="协议分析攻击（SYN flood，SYN洪水）"></a>协议分析攻击（SYN flood，SYN洪水）</h3><p>传送控制协议（TCP）同步（SYN）攻击。TCP进程通常包括发送者和接受者之间在数据包发送之前创建的完全信号交换。启动系统发送一个SYN请求，接收系统返回一个带有自己SYN请求的ACK（确认）作为交换。发送系统接着传回自己的ACK来授权两个系统间的通讯。若接收系统发送了SYN数据包，但没接收到ACK，接受者经过一段时间后会再次发送新的SYN数据包。接受系统中的处理器和内存资源将存储该TCP SYN的请求直至超时。DDoS TCP SYN攻击也被称为“资源耗尽攻击”，它利用TCP功能将僵尸程序伪装的TCP SYN请求发送给受害服务器，从而饱和服务处理器资源并阻止其有效地处理合法请求。它专门利用发送系统和接收系统间的三向信号交换来发送大量欺骗性的原IP地址TCP SYN数据包给受害系统。最终，大量TCP SYN攻击请求反复发送，导致受害系统内存和处理器资源耗尽，致使其无法处理任何合法用户的请求。</p>
+<h3 id="LAND攻击"><a href="#LAND攻击" class="headerlink" title="LAND攻击"></a>LAND攻击</h3><p>这种攻击方式与SYN floods类似，不过在LAND攻击包中的原地址和目标地址都是攻击对象的IP。这种攻击会导致被攻击的机器死循环，最终耗尽资源而死机。</p>
+<h3 id="CC攻击（Distributed-HTTP-flood，分布式HTTP洪水攻击）"><a href="#CC攻击（Distributed-HTTP-flood，分布式HTTP洪水攻击）" class="headerlink" title="CC攻击（Distributed HTTP flood，分布式HTTP洪水攻击）"></a>CC攻击（Distributed HTTP flood，分布式HTTP洪水攻击）</h3><p>CC攻击使用代理服务器向受害服务器发送大量貌似合法的请求（通常为HTTPGET)。攻击者创造性地使用代理，利用广泛可用的免费代理服务器发动DDoS攻击。许多免费代理服务器支持匿名，这使追踪变得非常困难。2004年，一位匿名为KiKi的中国黑客开发了一种用于发送HTTP请求的DDoS攻击工具以攻击名为“Collapsar”的NSFOCUS防火墙，因此该黑客工具被称为“Challenge Collapsar”（挑战黑洞，简称CC），这类攻击被称作“CC攻击”。</p>
+<h3 id="僵尸网络攻击"><a href="#僵尸网络攻击" class="headerlink" title="僵尸网络攻击"></a>僵尸网络攻击</h3><p>僵尸网络是指大量被命令与控制（C&amp;C）服务器所控制的互联网主机群。攻击者传播恶意软件并组成自己的僵尸网络。僵尸网络难于检测的原因是，僵尸主机只有在执行特定指令时才会与服务器进行通讯，使得它们隐蔽且不易察觉。僵尸网络根据网络通讯协议的不同分为IRC、HTTP或P2P类等。</p>
+<h3 id="应用程序级洪水攻击（Application-level-floods）"><a href="#应用程序级洪水攻击（Application-level-floods）" class="headerlink" title="应用程序级洪水攻击（Application level floods）"></a>应用程序级洪水攻击（Application level floods）</h3><p>与前面叙说的攻击方式不同，应用程序级洪水攻击主要是针对应用软件层的，也就是高于OSI的。它同样是以大量消耗系统资源为目的，通过向IIS这样的网络服务程序提出无节制的资源申请来破坏正常的网络服务。</p>
+<h1 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h1><p>防火墙指的是一个由软件和硬件设备组合而成、在内部网和外部网之间、专用网与公共网之间的界面上构造的保护屏障，用来隔离非授权用户并过滤网络中有害的流量或数据包。防火墙其实是一种隔离技术。</p>
+<p>在计算机中，防火墙是基于预定安全规则来监视和控制传入和传出网络流量的网络安全系统。该计算机流入流出的所有网络通信均要经过此防火墙。防火墙对流经它的网络通信进行扫描，这样能够过滤掉一些攻击，以免其在目标计算机上被执行。防火墙还可以关闭不使用的端口。而且它还能禁止特定端口的流出通信，封锁特洛伊木马。最后，它可以禁止来自特殊站点的访问，从而防止来自不明入侵者的所有通信。</p>
+<ul>
+<li><p>防火墙是网络安全的屏障</p>
+<p>一个防火墙（作为阻塞点、控制点）能极大地提高一个内部网络的安全性，并通过过滤不安全的服务而降低风险。由于只有经过精心选择的应用协议才能通过防火墙，所以网络环境变得更安全。如防火墙可以禁止诸如众所周知的不安全的NFS协议进出受保护网络，这样外部的攻击者就不可能利用这些脆弱的协议来攻击内部网络。防火墙同时可以保护网络免受基于路由的攻击，如IP选项中的源路由攻击和ICMP重定向中的重定向路径。防火墙应该可以拒绝所有以上类型攻击的报文并通知防火墙管理员。</p>
+</li>
+<li><p>防火墙可以强化网络安全策略</p>
+<p>通过以防火墙为中心的安全方案配置，能将所有安全软件（如口令、加密、身份认证、审计等）配置在防火墙上。与将网络安全问题分散到各个主机上相比，防火墙的集中安全管理更经济。例如在网络访问时，一次一密口令系统和其它的身份认证系统完全可以不必分散在各个主机上，而集中在防火墙一身上。</p>
+</li>
+<li><p>对网络存取和访问进行监控审计</p>
+<p>如果所有的访问都经过防火墙，那么，防火墙就能记录下这些访问并作出日志记录，同时也能提供网络使用情况的统计数据。当发生可疑动作时，防火墙能进行适当的报警，并提供网络是否受到监测和攻击的详细信息。另外，收集一个网络的使用和误用情况也是非常重要的。首先的理由是可以清楚防火墙是否能够抵挡攻击者的探测和攻击，并且清楚防火墙的控制是否充足。而网络使用统计对网络需求分析和威胁分析等而言也是非常重要的。</p>
+</li>
+<li><p>防止内部信息的外泄</p>
+<p>通过利用防火墙对内部网络的划分，可实现内部网重点网段的隔离，从而限制了局部重点或敏感网络安全问题对全局网络造成的影响。再者，隐私是内部网络非常关心的问题，一个内部网络中不引人注意的细节可能包含了有关安全的线索而引起外部攻击者的兴趣，甚至因此而暴漏了内部网络的某些安全漏洞。使用防火墙就可以隐蔽那些透漏内部细节如Finger，DNS等服务。Finger显示了主机的所有用户的注册名、真名，最后登录时间和使用shell类型等。但是Finger显示的信息非常容易被攻击者所获悉。攻击者可以知道一个系统使用的频繁程度，这个系统是否有用户正在连线上网，这个系统是否在被攻击时引起注意等等。防火墙可以同样阻塞有关内部网络中的DNS信息，这样一台主机的域名和IP地址就不会被外界所了解。</p>
+</li>
+<li><p>支持虚拟专用网</p>
+<p>除了安全作用，防火墙还支持具有Internet服务特性的企业内部网络技术体系VPN（虚拟专用网）。</p>
+</li>
+</ul>
+<h2 id="包过滤防火墙"><a href="#包过滤防火墙" class="headerlink" title="包过滤防火墙"></a>包过滤防火墙</h2><p>介绍：第一代防火墙是1989年产生的，仅能实现简单的访问控制。包过滤防火墙认为数据包之间是割裂的个体，网络更容易受到入侵。</p>
+<p>技术：属于三层技术, 使用ACL( 访问控制列表技术 )，与nat结合使用</p>
+<p>优点：简单、速度快</p>
+<p>缺点：但是检测的颗粒粗</p>
+<h2 id="代理防火墙"><a href="#代理防火墙" class="headerlink" title="代理防火墙"></a>代理防火墙</h2><p>介绍：在应用层代理内部网络和外部网络之间的通信。</p>
+<p>技术：应用层，中间人技术（代理技术）</p>
+<p>优点：安全较高，能防御应用层威胁，内容威胁</p>
+<p>缺点：技术复杂，速度慢，只能对特定的应用提供代理支持，应用剑不能通用。</p>
+<h2 id="状态检测防火墙"><a href="#状态检测防火墙" class="headerlink" title="状态检测防火墙"></a>状态检测防火墙</h2><p>介绍：通过跟踪网络连接的过程，以流量为单位，确定连接是否可靠。目前最常见的防火墙。在包过滤（ACL表）的基础上增加一个会话表，数据包需要查看会话表来实现匹配。状态监测防火墙认为报文与报文之间是存在联系的，从而寻求数据包之间的“合作发展”，最后实现高效率、高安全、可持续发展</p>
+<p>技术：会话追踪技术，首包机制</p>
+<p>优点：颗粒度细，速度快（会话表可以用hash来处理形成定长值，使用CAM芯片处理，采用二元匹配机制，达到交换机的处理速度）</p>
+<p>工作原理：当WEB服务器回应PC的报文到达防火墙后，防火墙会把报文中的信息与会话中的信息进行比对。如果发现报文当中的信息与会话当中的信息相匹配，并且该报文符合HTTP协议规定的规范，则认为这个报文属于PC访问WEB服务器行为的后续回应报文，直接允许这个报文通过。如果是首包，报文中的信息与会话中的信息是不匹配的，会再去看ACL表，通过ACL表以后就产生了会话表，第二个包访问就先访问会话表，如果与会话表中的信息匹配并符合HTTP协议的规范，则之间进入下一步。</p>
+<p>运行模式：状态检测”机制，是以流量为单位 来对报文进行检测和转发，即：对一条流量的第一个报文(首包)进行包过滤规则检查，第一次来的包（防火墙可以区分是去的，还是回的），并将判断结果作为该条流量的”状态”记录进会话表项，建立两个缓存的session(一个去包缓存、一个回包缓存)，后续属于同一数据流的数据包匹配缓存表后放行</p>
+<p>会话表：会话表当中包含PC发出的报文信息如地址和端口等</p>
+<h2 id="统一威胁管理-简称-UTM"><a href="#统一威胁管理-简称-UTM" class="headerlink" title="统一威胁管理 (简称 UTM)"></a>统一威胁管理 (简称 UTM)</h2><p>介绍：人们给状态监测防火墙上集成了VPN、防病毒、邮件过滤关键字过滤等功能，目的是想实现对网络统一地、全方位地保护，渐渐形成了第四代防火墙：UTM（统一威胁管理）。即将防病毒、入侵检测和防火墙安全设备划归统一威胁管理(Unified Threat Management，简称UTM)新类别。由IDC提出的UTM是指由硬件、软件和网络技术组成的具有专门用途的设备，它主要提供一项或多项安全功能，将多种安全特性集成于一个硬设备里，构成一个标准的统一管理平台。</p>
+<p>技术：将网关、IDS、IPS等设备进行串行连接，UTM设备应该具备的基本功能包括网络防火墙、网络入侵检测&#x2F;防御和网关防病毒功能。</p>
+<p>功能：FW、IDS、IPS、AV</p>
+<p>特点：把应用网关和IPS等设备在状态防火墙的基础上进行整合和统一。</p>
+<p>优点：整合所带来的成本降低、降低信息安全工作强度、降低技术复杂度</p>
+<h2 id="下一代防火墙-简称-NG"><a href="#下一代防火墙-简称-NG" class="headerlink" title="下一代防火墙 (简称 NG)"></a>下一代防火墙 (简称 NG)</h2><p>介绍：下一代防火墙，即Next Generation Firewall，简称NG Firewall，是一款可以全面应对应用层威胁的高性能防火墙。</p>
+<p>技术：工作范围在2-7层</p>
+<p>功能：FW、IDS、IPS、AV、WAF</p>
+<p>优点：</p>
+<p>与UTM相比增加的web应用防护功能，功能更全。</p>
+<p>UTM是串行处理机制，NGFW是并行处理机制，效率更高。</p>
+<p>NGFW的性能更强，管理更高效。</p>
+<p>我们现在常见的防火墙都是第五代防火墙。</p>
+<h1 id="IP安全、VPN和入侵检测"><a href="#IP安全、VPN和入侵检测" class="headerlink" title="IP安全、VPN和入侵检测"></a>IP安全、VPN和入侵检测</h1><h2 id="IP安全"><a href="#IP安全" class="headerlink" title="IP安全"></a>IP安全</h2><p>有各种应用程序安全机制：S&#x2F;MIME, Kerberos, SSL&#x2F;HTTPS。</p>
+<p>安全问题：跨协议层。希望网络为所有应用程序实现安全性。下一代IPv6中包含的认证和加密安全特性。也可用于现有的IPv4中。</p>
+<p><strong>IPsec的好处：</strong></p>
+<ul>
+<li>当在防火墙或路由器中实现时，它为所有跨越边界的流量提供了强大的安全性</li>
+<li>在防火墙中，它无法绕过</li>
+<li>在传输层下面，因此对应用程序是透明的</li>
+<li>可以对最终用户透明</li>
+<li>可以为个人用户提供安全性</li>
+<li>保护路由体系结构</li>
+</ul>
+<p><strong>Security Associations：</strong></p>
+<p>Defined by 3 parameters：Security Parameter Index (SPI)，IP Destination Address，Protocol Identifier</p>
+<p>发送方和接收方之间的单向关系，为交通流量提供安全保障。（If a peer relationship is needed for two way secure exchange then two security associations are required）</p>
+<p>Is uniquely identified by the Destination Address in the IPv4 or IPv6 header and the SPI in the </p>
+<p>enclosed extension header (AH or ESP)</p>
+<p><strong>Transport and Tunnel Modes</strong></p>
+<p>Transport Mode</p>
+<ul>
+<li>Extends to the payload of an IP packet</li>
+<li>Typically used for end-to-end communication between two hosts</li>
+<li>ESP encrypts and optionally authenticates the IP payload but not the IP header</li>
+</ul>
+<p>Tunnel Mode</p>
+<ul>
+<li>Provides protection to the entire IP packet</li>
+<li>The entire original packet travels through a tunnel from one point of an IP network to another</li>
+<li>Used when one or both ends of a security association are a security gateway</li>
+<li>A number of hosts on networks behind firewalls may engage in secure communications without implementing IPsec</li>
+</ul>
+<p><strong>虚拟专用网（VPN）</strong></p>
+<p>Implement IPSEC at Firewall, so providing secure communication across the public Internet between sites. Implement IPSEC in a user system for secure connection to premises.</p>
+<p><strong>入侵检测系统（IDS）</strong></p>
+<ul>
+<li><p>Host-based IDS (HIDS)</p>
+<p>监视单个主机的特征</p>
+</li>
+<li><p>Network-based IDS (NIDS)</p>
+<p>监控网络流量，并分析网络、传输和应用程序协议，以识别可疑的活动</p>
+</li>
+<li><p>Distributed or hybrid IDS</p>
+<p>结合来自多个传感器的信息，通常是基于主机和网络的信息，组合在一个中央分析器中，能够更好地识别和响应入侵活动</p>
+</li>
+</ul>
+<h1 id="云和物联网安全"><a href="#云和物联网安全" class="headerlink" title="云和物联网安全"></a>云和物联网安全</h1><h2 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h2><p>云计算：一种模型，使无处不在、方便、按需的网络访问共享的可配置计算资源池（如网络、服务器、存储、应用程序和服务），可以以最小的管理工作或服务提供商交互快速提供和发布。该云模型促进了可用性，并由五个基本特征、三种服务模型和四种部署模型组成。</p>
+<p><img src="https://s2.loli.net/2024/01/11/NGkZP9Vp53USX8Q.png" alt="png"></p>
+<p>NIST定义了三种服务模型，它们可以被视为嵌套的服务替代方案：Software as a service (SaaS)，Platform as a service (PaaS)，Infrastructure as a service (IaaS)</p>
+<p><strong>风险及对策</strong></p>
+<p>云安全联盟列出了以下是特定于云的首要安全威胁：</p>
+<ul>
+<li>对云计算的滥用和恶意使用</li>
+<li>不安全的接口和api</li>
+<li>恶意内部人士</li>
+<li>共享技术问题</li>
+<li>数据丢失或泄漏</li>
+<li>帐户或服务劫持</li>
+<li>未知的风险概况</li>
+</ul>
+<h2 id="物联网（IoT）"><a href="#物联网（IoT）" class="headerlink" title="物联网（IoT）"></a>物联网（IoT）</h2><p>物联网是一个术语，指智能设备的互联互通不断扩大，从电器到微型传感器。这些对象传递传感器信息，能够对其环境起作用，在某些情况下可以修改自身，以创建一个更大系统的整体管理。物联网主要是由深置嵌入式设备驱动的。</p>
+<p><img src="https://s2.loli.net/2024/01/11/ZLnVwCofdEMqj9J.png" alt="png"></p>
+<p>物联网安全和隐私要求：通信安全，数据管理安全，服务提供安全，安全策略和技术的集成，相互身份验证和授权，安全审核</p>
+<h1 id="信息技术安全与风险管理"><a href="#信息技术安全与风险管理" class="headerlink" title="信息技术安全与风险管理"></a>信息技术安全与风险管理</h1><p>是回答这些问题的正式过程：有哪些资产需要得到保护？这些资产如何受到威胁？如何应对这些威胁？确保关键资产以具有成本效益的方式得到充分的保护，需要对组织中需要保护的每个资产进行安全风险评估，提供必要的信息，以决定需要哪些管理、操作和技术控制，以减少所识别的风险。</p>
+<p>组织背景和安全策略</p>
+<p>安全风险评估：基线方法，非正式方法，详细的风险分析，组合方法</p>
+<p>详细的安全风险分析：环境和系统特性，识别威胁&#x2F;风险&#x2F;脆弱性，分析风险，评估风险，风险处理</p>
+<p>计算机安全法律</p>
+<h1 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h1><p>攻击面分类：</p>
+<ul>
+<li><p>网络攻击面</p>
+<p>企业网络、广域网或互联网上的漏洞。</p>
+<p>这类漏洞包括网络协议漏洞，例如那些用于拒绝服务攻击、通信链路中断和各种形式的入侵者攻击的漏洞。</p>
+</li>
+<li><p>软件攻击面</p>
+<p>应用程序、实用程序或操作系统代码中的漏洞。</p>
+<p>特别关注的是Web服务器软件。</p>
+</li>
+<li><p>人的攻击面</p>
+<p>由人员或外部人士造成的漏洞，如社会工程、人为错误和值得信任的内部人士。</p>
+</li>
+</ul>
+<p>什么是渗透测试？</p>
+<p>Also known as pen testing (or test) or ethical hacking. Authorised and legal attempt to expose and exploit vulnerabilities in a target system. Analytical evaluation of the target system’s security. Reporting：Catalogue potential threats，Determine the feasibility of a cyber-attack，Assess the potential impact on a business of a successful cyber-attack，Publicly available pen test reports.</p>
+<p>Why Pen Testing?</p>
+<p>使计算机系统、网络系统和网络应用程序更加安全。它的目的是在攻击者利用它们之前发现并减轻系统中的安全弱点。理由：Pen Testing提供了一定程度的保证，即任何恶意用户都将无法穿透系统。Pen Testing应该在任何计算机系统上进行：在它被部署之前（和之后），特别是面向互联网的系统，软件版本更新。</p>
+<p>黑盒测试：</p>
+<p>✓盲测，✓没有目标系统的先验知识，✓必须找到并暴露弱点，✓模拟攻击者外部，✓劳动密集型，✓需要专业知识以将风险最小化</p>
+<p>白盒测试：</p>
+<p>✓内部测试，✓对基础设施的完整知识，✓通常作为一个完全自动化的过程进行，✓模拟内部攻击，如不高兴的员工，如信息泄露后</p>
+<p>灰盒测试：</p>
+<p>✓黑盒和白盒之间的变化，✓部分披露</p>
+<p>NIST methodology: planning, discovery, attack and reporting phase. </p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://sdupc.top">Chao Pang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2023/12/06/computer_security/">http://sdupc.top/2023/12/06/computer_security/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Chao Pang的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS%E5%AE%89%E5%85%A8/">CS安全</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/12/06/8kuCgIMOAa9X4JL.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/12/18/human_computer_interaction/" title="人机交互设计"><img class="cover" src="https://s2.loli.net/2023/12/18/KnC9vL3War5oqU8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">人机交互设计</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/04/vue_router_vuex/" title="Vue-router和vuex"><img class="cover" src="https://s2.loli.net/2023/11/14/n2Ns1YqXUZmVith.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vue-router和vuex</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chao Pang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pc@sdupc.top" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个热爱古诗词和历史的 ISTJ ，欢迎来到我的个人主页~有任何问题都可以与我邮件交流！邮箱：pc@sdupc.top</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">2.</span> <span class="toc-text">非对称加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81"><span class="toc-number">3.</span> <span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AD%96%E7%95%A5"><span class="toc-number">4.</span> <span class="toc-text">访问控制策略</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E4%B8%BB%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%88DAC%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">自主访问控制（DAC）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">4.2.</span> <span class="toc-text">强制访问控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">4.3.</span> <span class="toc-text">基于角色的访问控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%B1%9E%E6%80%A7%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">4.4.</span> <span class="toc-text">基于属性的访问控制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8"><span class="toc-number">5.</span> <span class="toc-text">数据库安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">5.1.</span> <span class="toc-text">SQL注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">恶意软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%BC%8F%E6%B4%9E"><span class="toc-number">7.</span> <span class="toc-text">软件漏洞</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB%E5%AE%89%E5%85%A8"><span class="toc-number">8.</span> <span class="toc-text">WEB安全</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB"><span class="toc-number">9.</span> <span class="toc-text">拒绝服务攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%A6%E5%AE%BD%E6%B6%88%E8%80%97%E5%9E%8B%E6%94%BB%E5%87%BB"><span class="toc-number">9.1.</span> <span class="toc-text">带宽消耗型攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%B4%AA%E6%B0%B4%E6%94%BB%E5%87%BB%EF%BC%88User-Datagram-Protocol-floods%EF%BC%89"><span class="toc-number">9.1.1.</span> <span class="toc-text">UDP洪水攻击（User Datagram Protocol floods）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP%E6%B4%AA%E6%B0%B4%E6%94%BB%E5%87%BB%EF%BC%88ICMP-floods%EF%BC%89"><span class="toc-number">9.1.2.</span> <span class="toc-text">ICMP洪水攻击（ICMP floods）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E4%BA%A1%E4%B9%8BPing%EF%BC%88ping-of-death%EF%BC%89"><span class="toc-number">9.1.3.</span> <span class="toc-text">死亡之Ping（ping of death）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%AA%E6%BB%B4%E6%94%BB%E5%87%BB"><span class="toc-number">9.1.4.</span> <span class="toc-text">泪滴攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E6%B6%88%E8%80%97%E5%9E%8B%E6%94%BB%E5%87%BB"><span class="toc-number">9.2.</span> <span class="toc-text">资源消耗型攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E6%94%BB%E5%87%BB%EF%BC%88SYN-flood%EF%BC%8CSYN%E6%B4%AA%E6%B0%B4%EF%BC%89"><span class="toc-number">9.2.1.</span> <span class="toc-text">协议分析攻击（SYN flood，SYN洪水）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LAND%E6%94%BB%E5%87%BB"><span class="toc-number">9.2.2.</span> <span class="toc-text">LAND攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CC%E6%94%BB%E5%87%BB%EF%BC%88Distributed-HTTP-flood%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8FHTTP%E6%B4%AA%E6%B0%B4%E6%94%BB%E5%87%BB%EF%BC%89"><span class="toc-number">9.2.3.</span> <span class="toc-text">CC攻击（Distributed HTTP flood，分布式HTTP洪水攻击）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">9.2.4.</span> <span class="toc-text">僵尸网络攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%BA%A7%E6%B4%AA%E6%B0%B4%E6%94%BB%E5%87%BB%EF%BC%88Application-level-floods%EF%BC%89"><span class="toc-number">9.2.5.</span> <span class="toc-text">应用程序级洪水攻击（Application level floods）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">10.</span> <span class="toc-text">防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E8%BF%87%E6%BB%A4%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">10.1.</span> <span class="toc-text">包过滤防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">10.2.</span> <span class="toc-text">代理防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">10.3.</span> <span class="toc-text">状态检测防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E4%B8%80%E5%A8%81%E8%83%81%E7%AE%A1%E7%90%86-%E7%AE%80%E7%A7%B0-UTM"><span class="toc-number">10.4.</span> <span class="toc-text">统一威胁管理 (简称 UTM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E4%BB%A3%E9%98%B2%E7%81%AB%E5%A2%99-%E7%AE%80%E7%A7%B0-NG"><span class="toc-number">10.5.</span> <span class="toc-text">下一代防火墙 (简称 NG)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IP%E5%AE%89%E5%85%A8%E3%80%81VPN%E5%92%8C%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B"><span class="toc-number">11.</span> <span class="toc-text">IP安全、VPN和入侵检测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IP%E5%AE%89%E5%85%A8"><span class="toc-number">11.1.</span> <span class="toc-text">IP安全</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%91%E5%92%8C%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8"><span class="toc-number">12.</span> <span class="toc-text">云和物联网安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97"><span class="toc-number">12.1.</span> <span class="toc-text">云计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E8%81%94%E7%BD%91%EF%BC%88IoT%EF%BC%89"><span class="toc-number">12.2.</span> <span class="toc-text">物联网（IoT）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF%E5%AE%89%E5%85%A8%E4%B8%8E%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86"><span class="toc-number">13.</span> <span class="toc-text">信息技术安全与风险管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="toc-number">14.</span> <span class="toc-text">渗透测试</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/06/dps/" title="数字信号处理"><img src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字信号处理"/></a><div class="content"><a class="title" href="/2024/07/06/dps/" title="数字信号处理">数字信号处理</a><time datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="现代软件开发中的模式"/></a><div class="content"><a class="title" href="/2024/03/28/software_design/" title="现代软件开发中的模式">现代软件开发中的模式</a><time datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ChatGPT的流式输出"/></a><div class="content"><a class="title" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出">ChatGPT的流式输出</a><time datetime="2024-03-16T06:29:48.000Z" title="发表于 2024-03-16 14:29:48">2024-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python编写规范PEP8"/></a><div class="content"><a class="title" href="/2024/02/14/pep8/" title="Python编写规范PEP8">Python编写规范PEP8</a><time datetime="2024-02-14T06:54:36.000Z" title="发表于 2024-02-14 14:54:36">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理"><img src="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识与推理"/></a><div class="content"><a class="title" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理">知识与推理</a><time datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Chao Pang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

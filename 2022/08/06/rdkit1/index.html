@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>RDKit基础操作 (一) | Chao Pang的个人主页</title><meta name="author" content="Chao Pang"><meta name="copyright" content="Chao Pang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="RDKit对象分子对象分子对象是RDKit里最重要的一种对象，大部分的操作都围绕它展开。得到分子对象的方式通常是由SMILES字符串转换而来。比如我们想要得到苯的分子对象： 123from rdkit import Chemmol &#x3D; Chem.MolFromSmiles(&amp;#x27;c1ccccc1&amp;#x27;)  SMILES以及分子对象中一般不显式写出氢原子，而是通过化学规则推断。如果要显示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RDKit基础操作 (一)">
+<meta property="og:url" content="http://sdupc.top/2022/08/06/rdkit1/index.html">
+<meta property="og:site_name" content="Chao Pang的个人主页">
+<meta property="og:description" content="RDKit对象分子对象分子对象是RDKit里最重要的一种对象，大部分的操作都围绕它展开。得到分子对象的方式通常是由SMILES字符串转换而来。比如我们想要得到苯的分子对象： 123from rdkit import Chemmol &#x3D; Chem.MolFromSmiles(&amp;#x27;c1ccccc1&amp;#x27;)  SMILES以及分子对象中一般不显式写出氢原子，而是通过化学规则推断。如果要显示">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/06/oLD9xzBcXnMP2Q7.png">
+<meta property="article:published_time" content="2022-08-06T08:41:35.000Z">
+<meta property="article:modified_time" content="2024-07-06T07:03:35.524Z">
+<meta property="article:author" content="Chao Pang">
+<meta property="article:tag" content="RDKit">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/06/oLD9xzBcXnMP2Q7.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2022/08/06/rdkit1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'RDKit基础操作 (一)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-06 15:03:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/08/06/oLD9xzBcXnMP2Q7.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Chao Pang的个人主页"><span class="site-name">Chao Pang的个人主页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">RDKit基础操作 (一)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-06T08:41:35.000Z" title="发表于 2022-08-06 16:41:35">2022-08-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T07:03:35.524Z" title="更新于 2024-07-06 15:03:35">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8C%96%E5%AD%A6%E4%BF%A1%E6%81%AF%E5%AD%A6/">化学信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="RDKit基础操作 (一)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="RDKit对象"><a href="#RDKit对象" class="headerlink" title="RDKit对象"></a>RDKit对象</h1><h2 id="分子对象"><a href="#分子对象" class="headerlink" title="分子对象"></a>分子对象</h2><p>分子对象是RDKit里最重要的一种对象，大部分的操作都围绕它展开。得到分子对象的方式通常是由SMILES字符串转换而来。比如我们想要得到苯的分子对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rdkit <span class="keyword">import</span> Chem</span><br><span class="line"></span><br><span class="line">mol = Chem.MolFromSmiles(<span class="string">&#x27;c1ccccc1&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>SMILES以及分子对象中一般不显式写出氢原子，而是通过化学规则推断。如果要显示出显式氢，可以使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mol = Chem.AddHs(mol)</span><br></pre></td></tr></table></figure>
+
+<p>同理，去掉显式氢则使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mol = Chem.RemoveHs(mol)</span><br></pre></td></tr></table></figure>
+
+<p>获取分子的原子数和化学键数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mol.GetNumAtoms()</span><br><span class="line">mol.GetNumBonds()</span><br></pre></td></tr></table></figure>
+
+<p>获取分子中的原子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GetAtoms()</span><br><span class="line"></span><br><span class="line">atoms = mol.GetAtoms()</span><br><span class="line"><span class="keyword">for</span> atom <span class="keyword">in</span> atoms:</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<p>获取分子中的键：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GetBonds()</span><br><span class="line"></span><br><span class="line">bonds = mol.GetBonds()</span><br><span class="line"><span class="keyword">for</span> bond <span class="keyword">in</span> bonds:</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<p>根据原子编号获取原子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GetAtomWithIdx()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="原子对象"><a href="#原子对象" class="headerlink" title="原子对象"></a>原子对象</h2><p>对于上文得到的原子对象atom，我们可以对其做大量的操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GetAtomMapNum: 原子smarts形式冒号后面的数字，如[N:<span class="number">4</span>], <span class="built_in">map</span> <span class="built_in">id</span> 就是<span class="number">4</span>。</span><br><span class="line">GetAtomicNum： 获取原子对应的元素编号，如碳原子的AtomicNum就是<span class="number">6</span></span><br><span class="line">GetBonds: 该原子参与形成的键的列表。</span><br><span class="line">GetFormalCharge: 该原子的电荷</span><br><span class="line">GetChiralTag: 原子的手性信息</span><br><span class="line">GetDegree： 原子的度，这里的度指的是这个原子参与形成键的数目</span><br><span class="line">GetIsAromatic: 判断原子是否是芳香性原子</span><br><span class="line">GetIdx： 获取原子的编号</span><br><span class="line">GetNeighbors： 获取相连的原子列表</span><br><span class="line">GetSmarts： 获取原子的Smarts形式</span><br><span class="line">GetSymbol：获取原子的元素符号</span><br><span class="line">IsInRing()： 判断原子是否在环上</span><br><span class="line">IsInRingSize(n): 判断原字是否在n-元环上</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="化学键对象"><a href="#化学键对象" class="headerlink" title="化学键对象"></a>化学键对象</h2><p>同理，对于上文得到的键对象bond，我们也可以对其做大量的操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GetBondType()：获取键的类型</span><br><span class="line">GetBeginAtom(): 组成键的第一个原子</span><br><span class="line">GetBeginAtomIdx()： 键的第一个组成原子编号</span><br><span class="line">GetEndAtomIdx()：键的第二个组成原子编号</span><br><span class="line">GetEndAtom(): 组成键的第二个原子</span><br><span class="line">IsInRing(): 判断是否在环上</span><br><span class="line">IsInRingSize(n)：判断是否在n-元环上</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="构象对象"><a href="#构象对象" class="headerlink" title="构象对象"></a>构象对象</h2><p>我们可以使用RDKit内置的力场优化方法，通过分子对象直接得到它的构象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rdkit <span class="keyword">import</span> AllChem</span><br><span class="line"></span><br><span class="line">mol2 = Chem.AddHs(mol)</span><br><span class="line">success = AllChem.EmbedMolecule(mol, randomSeed=<span class="number">2022</span>)</span><br><span class="line">conf = mol2.GetGonformer(<span class="number">0</span>)</span><br><span class="line">pos = conf.GetPositions()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="分子的可视化"><a href="#分子的可视化" class="headerlink" title="分子的可视化"></a>分子的可视化</h1><ol>
+<li><p>将分子对象显示为图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Draw.MolToImage(mol)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将分子对象保存为图片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Draw.MolToFile(mol,’filename.png’)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绘制多个分子对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Draw.MolsToGridImage(mols, molsPerRow=<span class="number">4</span>, subImgSize=(<span class="number">200</span>,<span class="number">200</span>))</span><br></pre></td></tr></table></figure></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://sdupc.top">Chao Pang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2022/08/06/rdkit1/">http://sdupc.top/2022/08/06/rdkit1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Chao Pang的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/RDKit/">RDKit</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/08/06/oLD9xzBcXnMP2Q7.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/10/18/pycharm/" title="Pycharm使用技巧"><img class="cover" src="https://s2.loli.net/2023/09/21/e6POVurGcNsgkCv.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Pycharm使用技巧</div></div></a></div><div class="next-post pull-right"><a href="/2022/06/13/magic_methods/" title="Python里的那些“魔术方法”"><img class="cover" src="https://s2.loli.net/2023/10/19/NTEj9nfHmsdaAvZ.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python里的那些“魔术方法”</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chao Pang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pc@sdupc.top" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个热爱古诗词和历史的 ISTJ ，欢迎来到我的个人主页~有任何问题都可以与我邮件交流！邮箱：pc@sdupc.top</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RDKit%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">RDKit对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%AD%90%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.1.</span> <span class="toc-text">分子对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.2.</span> <span class="toc-text">原子对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%96%E5%AD%A6%E9%94%AE%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">化学键对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E8%B1%A1%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.4.</span> <span class="toc-text">构象对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%AD%90%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">分子的可视化</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/06/dps/" title="数字信号处理"><img src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字信号处理"/></a><div class="content"><a class="title" href="/2024/07/06/dps/" title="数字信号处理">数字信号处理</a><time datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="现代软件开发中的模式"/></a><div class="content"><a class="title" href="/2024/03/28/software_design/" title="现代软件开发中的模式">现代软件开发中的模式</a><time datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ChatGPT的流式输出"/></a><div class="content"><a class="title" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出">ChatGPT的流式输出</a><time datetime="2024-03-16T06:29:48.000Z" title="发表于 2024-03-16 14:29:48">2024-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python编写规范PEP8"/></a><div class="content"><a class="title" href="/2024/02/14/pep8/" title="Python编写规范PEP8">Python编写规范PEP8</a><time datetime="2024-02-14T06:54:36.000Z" title="发表于 2024-02-14 14:54:36">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理"><img src="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识与推理"/></a><div class="content"><a class="title" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理">知识与推理</a><time datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Chao Pang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

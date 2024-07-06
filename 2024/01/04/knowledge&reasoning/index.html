@@ -1,0 +1,463 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>知识与推理 | Chao Pang的个人主页</title><meta name="author" content="Chao Pang"><meta name="copyright" content="Chao Pang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="智能代理 Agent定义For each possible percept sequence, a rational agent should select an action that is expected to maximise the performance measure, given the evidence provided by the percept sequence and w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识与推理">
+<meta property="og:url" content="http://sdupc.top/2024/01/04/knowledge&reasoning/index.html">
+<meta property="og:site_name" content="Chao Pang的个人主页">
+<meta property="og:description" content="智能代理 Agent定义For each possible percept sequence, a rational agent should select an action that is expected to maximise the performance measure, given the evidence provided by the percept sequence and w">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png">
+<meta property="article:published_time" content="2024-01-04T02:14:57.000Z">
+<meta property="article:modified_time" content="2024-07-06T07:03:35.522Z">
+<meta property="article:author" content="Chao Pang">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2024/01/04/knowledge&amp;reasoning/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '知识与推理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-06 15:03:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Chao Pang的个人主页"><span class="site-name">Chao Pang的个人主页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">知识与推理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T07:03:35.522Z" title="更新于 2024-07-06 15:03:35">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="知识与推理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="智能代理-Agent"><a href="#智能代理-Agent" class="headerlink" title="智能代理 Agent"></a>智能代理 Agent</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>For each possible percept sequence, a rational agent should <strong>select an action</strong> that is expected <strong>to maximise the performance measure</strong>, given the evidence provided by the percept sequence and whatever built-in knowledge the agent has.</p>
+<p>一个代理应该拥有：</p>
+<ul>
+<li>用来感知来自环境中的信息的<strong>Sensors 传感器</strong></li>
+<li>与环境进行交互的<strong>Actuators 执行器</strong></li>
+<li>指出应该怎么做的<strong>Agent function 代理函数</strong></li>
+</ul>
+<p>一个代理怎样才能变得智能？</p>
+<ul>
+<li>我们需要告诉代理什么是合理的，也就是说，它需要一个<strong>performance measure 性能度量</strong></li>
+<li>这个代理存储一个<strong>percept sequence 感知序列</strong>（有关环境状态的信息）</li>
+<li>代理可能有一些<strong>prior knowledge of the environment 关于环境的先验知识</strong></li>
+<li>具有代理可以执行的<strong>well-defined actions 定义良好的操作</strong></li>
+</ul>
+<h2 id="任务环境规范-Task-Environment-Specification"><a href="#任务环境规范-Task-Environment-Specification" class="headerlink" title="任务环境规范 Task Environment Specification"></a>任务环境规范 Task Environment Specification</h2><p>任务环境的性质（或维度）：</p>
+<ul>
+<li>Observability (full, partial)</li>
+<li>Deterministic or Stochastic</li>
+<li>Episodic or Sequential</li>
+<li>Static or Dynamic</li>
+<li>Discrete or Continuous</li>
+<li>Single or Multiple agents</li>
+</ul>
+<h2 id="用于搜索的代理"><a href="#用于搜索的代理" class="headerlink" title="用于搜索的代理"></a>用于搜索的代理</h2><p>Problem formalisation 问题形式化</p>
+<ol>
+<li><p>Determine the relevant <strong>problem-solving knowledge</strong></p>
+</li>
+<li><p>Find a suitable <strong>state representation</strong></p>
+</li>
+<li><p>Define the <strong>initial state</strong> and the <strong>goal state(s)</strong></p>
+</li>
+<li><p>Define a <strong>transition model</strong> (also called <strong>successor function</strong>, or <strong>operators</strong>)</p>
+</li>
+</ol>
+<p>路线查找算法</p>
+<ol>
+<li><strong>广度优先搜索 Breadth-First-Search (BFS)</strong></li>
+<li><strong>深度优先搜索 Depth-First-Search (DFS)</strong></li>
+</ol>
+<p>如何评价查找算法的性能？</p>
+<ul>
+<li><strong>Completeness</strong></li>
+</ul>
+<p>Will the algorithm find a solution if one exists?</p>
+<ul>
+<li><strong>Optimality</strong></li>
+</ul>
+<p>Will the algorithm find the solution with the lowest path cost?</p>
+<ul>
+<li><strong>Time Complexity</strong></li>
+</ul>
+<p>How long does it take the algorithm to find a solution?</p>
+<ul>
+<li><strong>Space Complexity</strong></li>
+</ul>
+<p>How much memory is needed to perform the search?</p>
+<p>时间和空间的复杂度与搜索树中的节点数量成正比。空间的复杂性也会受到所使用的特定搜索策略的影响。</p>
+<p>在人工智能问题中，复杂性可能难以衡量，因为我们可能从一开始就不知道确切的搜索树布局。如何得到一个大体的估计值？</p>
+<p><strong>Branching factor b</strong> (number of children per node)</p>
+<p><strong>Tree depth d</strong> (expected number of levels in the tree)</p>
+<p>$b^d$ &#x3D; number of nodes at depth d</p>
+<p>搜索树最深处的节点数是节点总数的下界。对于许多应用场景，这个值足以决定一个特定的搜索策略是否是寻找解决方案的可行选择。该值乘以算法处理单个节点所需的时间就是这个算法大体的时间复杂度。该值乘以单个节点的存储需求，从而得到空间复杂度的估计值。</p>
+<ol start="3">
+<li><strong>一致代价搜索 Uniform-Cost Search (UCS)</strong></li>
+</ol>
+<p>始终展开最浅的路径，即具有最低（总体）路径成本的后继路径。UCS是否比BFS更有效在很大程度上取决于路径成本分布。当所有路径成本相等时，UCS的行为与BFS相似。</p>
+<ol start="4">
+<li><strong>深度受限搜索 Depth-Limited Search (DLS)</strong></li>
+</ol>
+<p>DFS的一种变体，限制了探索的深度。这可以防止算法运行无限的路径。然而，这也引入了一个额外的不完整性来源。</p>
+<ol start="5">
+<li><strong>迭代深化搜索 Iterative Deepening Search (IDS)</strong></li>
+</ol>
+<p>迭代深化搜索（IDS）提供了一种解决深度限制搜索的正确限制的方法。通过迭代深化搜索，我们首先应用一个最小的深度限制（例如，1）。如果没有成功，我们将深度限制增加1，然后重复搜索，直到找到解决方案。底层的搜索技术仍然是DFS，因此不需要太大内存，因为它只在当前探索的级别上存储路径和节点。IDS可以说是最好的、通用的搜索策略，因为它提供了深度优先搜索的低内存成本，以及广度优先搜索的最优性和完整性。</p>
+<table>
+<thead>
+<tr>
+<th><strong>Search Strategy</strong></th>
+<th><strong>Complete?</strong></th>
+<th><strong>Optimal?</strong></th>
+<th><strong>Time Complexity</strong></th>
+<th><strong>Space Complexity</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BFS</td>
+<td>YES</td>
+<td>YES</td>
+<td>$O(b^d)$</td>
+<td>$O(b^d)$</td>
+</tr>
+<tr>
+<td>UCS</td>
+<td>YES</td>
+<td>YES</td>
+<td>$O(b^{\frac{OPTCOST} {MINCOST}})$</td>
+<td>$O(b^{\frac{OPTCOST} {MINCOST}})$</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>NO</td>
+<td>NO</td>
+<td>$O(b^d)$</td>
+<td>$O(b*d)$</td>
+</tr>
+<tr>
+<td>DLS</td>
+<td>NO</td>
+<td>NO</td>
+<td>$O(b^L)$</td>
+<td>$O(b*L)$</td>
+</tr>
+<tr>
+<td>IDS</td>
+<td>YES</td>
+<td>YES</td>
+<td>$O(b^d)$</td>
+<td>$O(b*d)$</td>
+</tr>
+</tbody></table>
+<h2 id="Abstract-data-types-ADT"><a href="#Abstract-data-types-ADT" class="headerlink" title="Abstract data types (ADT)"></a>Abstract data types (ADT)</h2><p>等同于数据结构</p>
+<ul>
+<li><strong>(FIFO) Queue 先进先出 队列</strong></li>
+<li><strong>(LIFO) Stack 后进先出 栈</strong></li>
+</ul>
+<h1 id="启发式与知情搜索策略-Heuristics-Informed-Search-Strategies"><a href="#启发式与知情搜索策略-Heuristics-Informed-Search-Strategies" class="headerlink" title="启发式与知情搜索策略 Heuristics &amp; Informed Search Strategies"></a>启发式与知情搜索策略 Heuristics &amp; Informed Search Strategies</h1><p><strong>启发式</strong></p>
+<p>利用有关问题的知识来支持，一种解决问题的有效方法。</p>
+<p><strong>Greedy Best-First Search</strong></p>
+<p>Not Optimal Not complete</p>
+<p><strong>A</strong>*</p>
+<p>使用一个同时包含路径代价和启发式代价的计算函数。</p>
+<p>$f(n)&#x3D;g(n)+h(n)$</p>
+<p>g(n) : accumulated path cost</p>
+<p>h(n) : estimated distance to goal </p>
+<p><strong>Conditions for Optimality</strong></p>
+<ul>
+<li><p>Admissibility</p>
+<p><em>A</em> <strong>heuristic h(n) is admissible if h(n) ≤ h*(n), where h*(n) is the true cost to reach the</strong> <strong>goal state from n</strong>, i.e. the <strong>heuristic is optimistic</strong> <em>such that it</em> <strong>never overestimates</strong> the actual cost to reach the goal state along the current path through n.</p>
+</li>
+<li><p>Consistency</p>
+<p>A heuristic <strong>h(n)</strong> is consistent if for every node <strong>n</strong> and every successor <strong>n’</strong> <em>of</em> <strong>n</strong> <em>generated</em> by any action <strong>a, the estimated cost of reaching the goal from n is no greater than the step cost n → n’ plus the estimated cost of reaching the goal from n’.</strong></p>
+</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li><p><strong>Complete</strong> for finite spaces &amp; positive path cost</p>
+</li>
+<li><p><strong>Optimal</strong>: will always expand the currently best path</p>
+</li>
+<li><p><strong>Optimally efficient</strong></p>
+<p>(There is no other search algorithm that is guaranteed to expand fewer nodes and still find an optimal solution)</p>
+</li>
+<li><p>Space and time complexity depend on the heuristic chosen but can still be high in worst case, similar to BFS: $b^d$</p>
+</li>
+</ul>
+<p>优化A*算法：</p>
+<p><strong>Lowest Evaluation Result First: g(n) + h(n)</strong></p>
+<p>ADT：<strong>Priority Queue 优先队列</strong></p>
+<p>Hanoi 汉诺塔问题</p>
+<h1 id="Game-Playing"><a href="#Game-Playing" class="headerlink" title="Game Playing"></a>Game Playing</h1><p>特点：</p>
+<ul>
+<li><p>确定性的</p>
+<p>状态转换规则</p>
+</li>
+<li><p>零和博弈</p>
+<p>一个玩家的胜利也就代表另一个玩家的失败。可能出现平局。</p>
+</li>
+<li><p>完美信息</p>
+<p>所有玩家都可以访问关于游戏状态的所有可用信息，包括历史移动。</p>
+</li>
+</ul>
+<p>Task Environment</p>
+<ul>
+<li><p>Initial state</p>
+</li>
+<li><p>Players</p>
+</li>
+<li><p>Transition Model (Actions + Results)</p>
+</li>
+<li><p>Terminal test (Goal test)</p>
+</li>
+<li><p>Utility-based evaluation function (What is the pay-off or outcome of each prospective move?)</p>
+</li>
+</ul>
+<h2 id="Minimax-Algorithm-极小化极大算法"><a href="#Minimax-Algorithm-极小化极大算法" class="headerlink" title="Minimax Algorithm 极小化极大算法"></a>Minimax Algorithm 极小化极大算法</h2><p>假设我们是参与博弈的一方。我们用静态估计函数$f(p)$来估计博弈双方的态势：</p>
+<p>有利于我方的态势：$f(p) \gt 0$<br>有利于敌方的态势：$f(p) \lt 0$<br>双方均衡的态势：$f(p) &#x3D; 0$<br>显然，我方希望$f(p)$ 最大化，敌方希望$f(p)$ 最小化。因此称我方为Max方，敌方为Min方</p>
+<p>在Max方的角度，因为是我们自己做决策，我们可以选择任意一种方案，所以我们只需选择收益最大的方案，也就是说每种方案之间是“或”的关系。</p>
+<p>而对于Min方而言，因为是敌方做决策，我们无法控制敌方选择哪种策略，假设敌方足够聪明，我们应该假设敌方选择对他最有利的方案，也就是对我们最不利的方案、使我们收益最小的方案，所以对他而言每种方案之间是“与”的关系。</p>
+<h2 id="Alpha-Beta-Pruning-alpha-beta-剪枝"><a href="#Alpha-Beta-Pruning-alpha-beta-剪枝" class="headerlink" title="Alpha-Beta Pruning $\alpha \beta$剪枝"></a>Alpha-Beta Pruning $\alpha \beta$剪枝</h2><p>α-β剪枝是一种优化方法，在博弈树生成的过程中同时计算各节点的估计值及倒推值，通过对估值的上下限进行估计，减去没有用的分支，减少搜索范围，提高效率。</p>
+<p>α-β剪枝的基本思想：</p>
+<p>“或”节点（Max方）：取当前子节点中效用值的极大值为该节点效用值的下界，称为α（α≥该极大值），只有当下一个节点的值大于α才会被选择</p>
+<p>“与”节点（Min方）：取当前子节点中效用值的极小值为该节点效用值的上界，称为β（β≤该极小值），只有当下一个节点的值小于α才会被选择</p>
+<p><strong>核心思想是：如果存在一个比某一分支更好的走法，那么就不考察这一分支。</strong></p>
+<h2 id="Negamax-Negamax-alpha-beta-algorithms-负极大值算法"><a href="#Negamax-Negamax-alpha-beta-algorithms-负极大值算法" class="headerlink" title="Negamax &#x2F; Negamax alpha beta algorithms 负极大值算法"></a>Negamax &#x2F; Negamax alpha beta algorithms 负极大值算法</h2><p>负极大值算法是极小化极大算法的一个变体，其基本原理是基于下面的公式：</p>
+<p>$max(a,b)&#x3D;-min(-a,-b)$</p>
+<p>即在几个节点中选择得分最小的节点相当于将这些节点的得分乘以-1然后取得分最大的节点。这样Negamax算法就将每一步递归过程都统一了起来，每一次递归都选取最大值。Negamax适用于只有两个玩家的零和游戏。</p>
+<h1 id="自动推理"><a href="#自动推理" class="headerlink" title="自动推理"></a>自动推理</h1><h2 id="认识论-Epistemology"><a href="#认识论-Epistemology" class="headerlink" title="认识论 Epistemology"></a>认识论 Epistemology</h2><p><strong>Explicit knowledge 显式知识</strong></p>
+<p><strong>Implicit knowledge 隐式知识</strong></p>
+<p><strong>Tacit knowledge 意会知识</strong></p>
+<p>知识从哪里来？</p>
+<p>通过从感官刺激中学习获得：经验主义</p>
+<p>通过推理获得：理性主义</p>
+<p>归纳，假设，演绎推理</p>
+<h2 id="正向推理-Forward-Reasoning"><a href="#正向推理-Forward-Reasoning" class="headerlink" title="正向推理 Forward-Reasoning"></a>正向推理 Forward-Reasoning</h2><p>逻辑含义称为规则，它存储在规则库中。我们使用一个前向链式过程来递归地生成结论。根据最初建立的事实，我们检查下一步可以使用哪些规则，也就是说，哪些规则现有事实满足它们的所有条件。然后，我们添加相关的结论并重复操作，直到无法得出新的结论。</p>
+<p>所发现的任何事实都决定了下一个规则的选择。因此，正向推理也被称为数据驱动的方法。</p>
+<h2 id="反向推理-Backward-Reasoning"><a href="#反向推理-Backward-Reasoning" class="headerlink" title="反向推理 Backward-Reasoning"></a>反向推理 Backward-Reasoning</h2><p>在另一种方法中，我们从希望得出的结论开始反向推理，看看它是否可以根据一个已知的事实是合理的。在逆向推理中，我们从假设作为目标开始，看看是否有任何前因（数据）支持对目标的结论。因此，逆向推理也被称为目标驱动的方法。</p>
+<h1 id="逻辑与知识表示"><a href="#逻辑与知识表示" class="headerlink" title="逻辑与知识表示"></a>逻辑与知识表示</h1><h2 id="命题逻辑"><a href="#命题逻辑" class="headerlink" title="命题逻辑"></a>命题逻辑</h2><p>在命题逻辑（propositional logic）中，原子公式（atomic formula）是命题（proposition）。原子公式是用来构造语句（sentence）的构成要素。在任意逻辑中，语句被视作一种特殊类型的公式，这两个术语之间不作区别。在命题逻辑中，每一个语句要么正确（true），要么错误（false），两者必居其一。真值（truth value) 1 或 0 被指派给相应的语句。在上面的例子中，我们可以把真值 1 指派给公式 A，真值 0 指派给公式 B。如果我们字面地理解公式 C，那么其真值是有争议的。也许，允许真值介于 1 和 0 之间更合理。我们可以把 0.75 指派给洛芙，如果洛芙比75%的美国女性更高。模糊逻辑（fuzzy logic）允许这样的真值存在，但是我们研究的经典逻辑不允许。</p>
+<p>实际上，命题的内容与命题逻辑无关。我们约定，从此以后，原子公式仅用大写字母A、B、C……表示（可能带有下标），而不涉及命题实际上在说什么。我们并不关心这些公式内容的准确性（veracity）。命题逻辑并不研究事实，而是研究不同命题的真值的关系。</p>
+<p>命题逻辑的语言主要包括“非（not）”“与（and）”“或（or）”“蕴含（implies）”和“当且仅当（if and only if）”。我们用以下符号分别表示命题逻辑中的词语： ¬  ∧  ∨  ⟹  ⟺ 。就像语言间的翻译一样，这样的对应并不是完全准确恰当的。这些符号表示的意义是准确的、不变的；而自然语言的词义往往取决于上下文。比如 ∧ 常会被解释为and。在命题逻辑中， A∧B 和 B∨A 的意义总是完全相同的。</p>
+<h2 id="一阶逻辑"><a href="#一阶逻辑" class="headerlink" title="一阶逻辑"></a>一阶逻辑</h2><p>不像命题逻辑只处理简单的陈述命题，一阶逻辑还额外包含了断言和量化。</p>
+<h2 id="关系与分类"><a href="#关系与分类" class="headerlink" title="关系与分类"></a>关系与分类</h2><p>知识的联想主义理论通过其与其他事物的关系来定义某一事物的意义。</p>
+<p>不同的关系可以描述不同的属性或行为。</p>
+<p>结构化表示比句子语言更灵活，对人类来说更容易理解和推理。</p>
+<p>简单的语义网可能会很混乱，但仍然可能允许某种程度的推理。</p>
+<p>在语义网络的思想之上，可以建立更专业的知识表示。例如，有框架、脚本和概念图。</p>
+<h2 id="本体和语义web"><a href="#本体和语义web" class="headerlink" title="本体和语义web"></a>本体和语义web</h2><p>本体在Web上的应用导致了语义Web的诞生，其目的是解决Web上信息共享时的语义问题。1999年，Web的创始人伯纳斯－李(Tim Berners-Lee)首次提出了“语义Web”（Semantic Web）的概念。2001年2月，W3C正式成立“Semantic Web Activity”来指导和推动语义Web的研究和发展，语义Web的地位得以正式确立。</p>
+<p>语义Web提供了一个通用的框架，允许跨越不同应用程序、企业和团体的边界共享和重用数据。语义Web是W3C领导下的协作项目，有大量研究人员和业界伙伴参与。语义Web以资源描述框架（RDF）为基础。RDF以XML作为语法、URI作为命名机制，将各种不同的应用集成在一起，对Web上的数据所进行的一种抽象表示。语义Web所指的“语义”是“机器可处理的”语义，而不是自然语言语义和人的推理等计算机所不能够处理的信息。</p>
+<p>知识管理是一种对知识的组织和再组织，以及对人的显性和隐性知识进行管理，通过对知识的获取、组织、分发、应用，实现知识共享和知识创新，提高组织的创新能力、反应能力、生产率以及技术技能，增加核心竞争力。在今天激烈竞争的环境中，知识管理有助于企业整合自身知识，实现知识流程化、企业化；使企业能够快速有效地对外界进行响应，提高单位时间内创造的价值；扩大知识利用的程度与范围，增强创新能力和商务智能；打破原有管理等级边界，拓展组织发展的空间。</p>
+<p>本体是语义Web的基础，本体可以有效地进行知识表达，知识查询，或不同领域知识的语义消解。本体还可以支持更丰富的服务发现、匹配和组合，提高自动化程度。本体知识管理（ontology-based knowledge management）可实现语义级知识服务，提高知识利用的深度。</p>
+<p>本体知识管理还可以支持对隐性知识进行推理，方便异构知识服务之间实现互操作，方便融入领域专家知识及经验知识结构化等。本体知识管理一般要求满足以下基本功能：①支持本体多种表示语言和存储形式，具有本体导航功能；②支持本体的基本操作如本体学习、本体映射、本体合并等；③提供本体版本管理功能，支持本体的可扩展性和一致性。</p>
+<p>知识本体是领域概念及概念之间关系的规范化描述，这种描述是规范的、明确的、形式化的，可共享的。“明确”意味着所采用概念的类型和它们应用的约束实行明确的定义。“形式化” 指知识本体是计算机可读的(即能被计算机处理)；“共享”反映知识本体应捕捉该领域中一致公认的知识，反映的是相关领域中公认的概念集，即知识本体针对的是团体而非个体的共识。知识本体的目标是捕获相关领域的知识,提供对该领域知识的共同理解,确定该领域内共同认可的词汇,并从不同层次的形式化模式上给出这些词汇和词汇间相互关系的明确定义。</p>
+<h2 id="模糊集-模糊逻辑"><a href="#模糊集-模糊逻辑" class="headerlink" title="模糊集&amp;模糊逻辑"></a>模糊集&amp;模糊逻辑</h2><p>在逻辑中，模糊逻辑是多值逻辑的一种形式，其中变量的真值可以是0到1之间的任何实数。它用于处理部分真值的概念，其中真值可能介于完全真值之间并且完全错误。相比之下，在布尔逻辑中，变量的真值可能只是整数值0或1。</p>
+<p>经典逻辑只允许结论为真或假。然而，也有一些具有可变答案的命题，例如在要求一群人识别颜色时可能会发现。在这种情况下，真理是从不精确或部分知识进行推理的结果，其中抽样答案被映射到频谱上。</p>
+<p>两个真实度的和概率的范围0到1之间，并因此可能看起来在xxx相似，但模糊逻辑使用真实度为的数学模型的模糊性，而概率是一个数学模型无知。</p>
+<p>应用真值：基本应用程序可能表征连续变量的各种子范围。例如，防抱死制动器的温度测量可能有几个单独的隶属函数，定义正确控制制动器所需的特定温度范围。每个函数将相同的温度值映射到0到1范围内的真值。然后可以使用这些真值来确定应如何控制制动器。模糊集理论提供了一种表示不确定性的方法。</p>
+<p>语言变量：在模糊逻辑应用中，经常使用非数字值来促进规则和事实的表达。诸如年龄之类的语言变量可以接受诸如年轻及其反义词old之类的值。由于自然语言并不总是包含足够的价值术语来表达模糊的价值尺度，因此通常的做法是用形容词或副词来修饰语言价值。例如，我们可以使用对冲而不是和有点来构造额外的值而不是旧或有点年轻。</p>
+<h2 id="贝叶斯规则"><a href="#贝叶斯规则" class="headerlink" title="贝叶斯规则"></a>贝叶斯规则</h2><p>条件概率：$P(A|B)$</p>
+<p>熵：$\sum_i^n{p_i*log_2(\frac{1}{p_i})}$</p>
+<p>Pi是第i个选择的概率。熵随备选方案的数量和归属概率的均匀性而增加。</p>
+<p>当使用熵作为不确定性的度量时，我们可以评估当一些事情发生并更新当前分布时我们获得了多少信息（即，我们获得了新的信息）。不确定性的减少意味着知识的增加。</p>
+<p>给定证据E和一些结论C：</p>
+<p>$P(C|E)&#x3D;\frac{P(C)*P(E|C)}{P(E)}$</p>
+<p>P(C)和P (E)被称为<strong>prior probabilities 先验概率</strong>。P（E|C）是<strong>likelihood 似然</strong>。P（C|E）被称为<strong>posterior probability 后验概率</strong>。</p>
+<p>条件概率遵循链式法则。</p>
+<p>贝叶斯网络</p>
+<p>马尔科夫链</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://sdupc.top">Chao Pang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2024/01/04/knowledge&amp;reasoning/">http://sdupc.top/2024/01/04/knowledge&amp;reasoning/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Chao Pang的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img class="cover" src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python编写规范PEP8</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/18/human_computer_interaction/" title="人机交互设计"><img class="cover" src="https://s2.loli.net/2023/12/18/KnC9vL3War5oqU8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">人机交互设计</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/04/04/segment_tree/" title="树状数组+线段树"><img class="cover" src="https://s2.loli.net/2022/04/04/SIZGrMEu4PCWJoA.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-04</div><div class="title">树状数组+线段树</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chao Pang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pc@sdupc.top" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个热爱古诗词和历史的 ISTJ ，欢迎来到我的个人主页~有任何问题都可以与我邮件交流！邮箱：pc@sdupc.top</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E4%BB%A3%E7%90%86-Agent"><span class="toc-number">1.</span> <span class="toc-text">智能代理 Agent</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%8E%AF%E5%A2%83%E8%A7%84%E8%8C%83-Task-Environment-Specification"><span class="toc-number">1.2.</span> <span class="toc-text">任务环境规范 Task Environment Specification</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E4%BB%A3%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">用于搜索的代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract-data-types-ADT"><span class="toc-number">1.4.</span> <span class="toc-text">Abstract data types (ADT)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8F%91%E5%BC%8F%E4%B8%8E%E7%9F%A5%E6%83%85%E6%90%9C%E7%B4%A2%E7%AD%96%E7%95%A5-Heuristics-Informed-Search-Strategies"><span class="toc-number">2.</span> <span class="toc-text">启发式与知情搜索策略 Heuristics &amp; Informed Search Strategies</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Game-Playing"><span class="toc-number">3.</span> <span class="toc-text">Game Playing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Minimax-Algorithm-%E6%9E%81%E5%B0%8F%E5%8C%96%E6%9E%81%E5%A4%A7%E7%AE%97%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">Minimax Algorithm 极小化极大算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Alpha-Beta-Pruning-alpha-beta-%E5%89%AA%E6%9E%9D"><span class="toc-number">3.2.</span> <span class="toc-text">Alpha-Beta Pruning $\alpha \beta$剪枝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Negamax-Negamax-alpha-beta-algorithms-%E8%B4%9F%E6%9E%81%E5%A4%A7%E5%80%BC%E7%AE%97%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">Negamax &#x2F; Negamax alpha beta algorithms 负极大值算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8E%A8%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">自动推理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E8%AE%BA-Epistemology"><span class="toc-number">4.1.</span> <span class="toc-text">认识论 Epistemology</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E6%8E%A8%E7%90%86-Forward-Reasoning"><span class="toc-number">4.2.</span> <span class="toc-text">正向推理 Forward-Reasoning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E6%8E%A8%E7%90%86-Backward-Reasoning"><span class="toc-number">4.3.</span> <span class="toc-text">反向推理 Backward-Reasoning</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E4%B8%8E%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">逻辑与知识表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91"><span class="toc-number">5.1.</span> <span class="toc-text">命题逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91"><span class="toc-number">5.2.</span> <span class="toc-text">一阶逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="toc-number">5.3.</span> <span class="toc-text">关系与分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E4%BD%93%E5%92%8C%E8%AF%AD%E4%B9%89web"><span class="toc-number">5.4.</span> <span class="toc-text">本体和语义web</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E7%B3%8A%E9%9B%86-%E6%A8%A1%E7%B3%8A%E9%80%BB%E8%BE%91"><span class="toc-number">5.5.</span> <span class="toc-text">模糊集&amp;模糊逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E8%A7%84%E5%88%99"><span class="toc-number">5.6.</span> <span class="toc-text">贝叶斯规则</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/06/dps/" title="数字信号处理"><img src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字信号处理"/></a><div class="content"><a class="title" href="/2024/07/06/dps/" title="数字信号处理">数字信号处理</a><time datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="现代软件开发中的模式"/></a><div class="content"><a class="title" href="/2024/03/28/software_design/" title="现代软件开发中的模式">现代软件开发中的模式</a><time datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ChatGPT的流式输出"/></a><div class="content"><a class="title" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出">ChatGPT的流式输出</a><time datetime="2024-03-16T06:29:48.000Z" title="发表于 2024-03-16 14:29:48">2024-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python编写规范PEP8"/></a><div class="content"><a class="title" href="/2024/02/14/pep8/" title="Python编写规范PEP8">Python编写规范PEP8</a><time datetime="2024-02-14T06:54:36.000Z" title="发表于 2024-02-14 14:54:36">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理"><img src="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识与推理"/></a><div class="content"><a class="title" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理">知识与推理</a><time datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Chao Pang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

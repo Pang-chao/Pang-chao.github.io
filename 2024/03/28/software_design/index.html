@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>现代软件开发中的模式 | Chao Pang的个人主页</title><meta name="author" content="Chao Pang"><meta name="copyright" content="Chao Pang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言在软件变得越来越大，越来越复杂的今天，像学生时代那样不使用任何设计模式、设计架构和设计工具来开发一款大型软件绝对是不可接受的。代码量一旦上来了，会出现很多代码量小的时候难以察觉到的设计思路缺陷和问题。这就要求我们一定要有工程化的思维。如果前期设计不好，代码量增加后后期修改和维护的成本将指数级上升。你会发现改任何一个点都会牵一发而动全身。 非常幸运的是，计算机与软件行业的前辈们已经将遇到的诸多问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代软件开发中的模式">
+<meta property="og:url" content="http://sdupc.top/2024/03/28/software_design/index.html">
+<meta property="og:site_name" content="Chao Pang的个人主页">
+<meta property="og:description" content="前言在软件变得越来越大，越来越复杂的今天，像学生时代那样不使用任何设计模式、设计架构和设计工具来开发一款大型软件绝对是不可接受的。代码量一旦上来了，会出现很多代码量小的时候难以察觉到的设计思路缺陷和问题。这就要求我们一定要有工程化的思维。如果前期设计不好，代码量增加后后期修改和维护的成本将指数级上升。你会发现改任何一个点都会牵一发而动全身。 非常幸运的是，计算机与软件行业的前辈们已经将遇到的诸多问">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png">
+<meta property="article:published_time" content="2024-03-28T14:34:28.000Z">
+<meta property="article:modified_time" content="2024-07-06T07:03:35.524Z">
+<meta property="article:author" content="Chao Pang">
+<meta property="article:tag" content="开发技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sdupc.top/2024/03/28/software_design/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '现代软件开发中的模式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-06 15:03:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Chao Pang的个人主页"><span class="site-name">Chao Pang的个人主页</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">现代软件开发中的模式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-06T07:03:35.524Z" title="更新于 2024-07-06 15:03:35">2024-07-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/">软件开发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="现代软件开发中的模式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在软件变得越来越大，越来越复杂的今天，像学生时代那样不使用任何设计模式、设计架构和设计工具来开发一款大型软件绝对是不可接受的。代码量一旦上来了，会出现很多代码量小的时候难以察觉到的设计思路缺陷和问题。这就要求我们一定要有工程化的思维。如果前期设计不好，代码量增加后后期修改和维护的成本将指数级上升。你会发现改任何一个点都会牵一发而动全身。</p>
+<p>非常幸运的是，计算机与软件行业的前辈们已经将遇到的诸多问题一一克服，并迭代改进出了许多优秀的设计模式和设计方法。本文将简单介绍这些模式和方法当时所面临的问题以及它们克服问题所使用的方法蕴含的思想。一是理顺自己的思路，提醒笔者自己不断学习、不断进步；二是为了能给后来的学弟学妹门一些引导和启发，希望能对大家有所帮助。</p>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>首先是最基础的OOP（Object Oriented Programming，面向对象编程）及其四大特性：封装、抽象、继承、多态。它能够将复杂事物建模为可重现的简单结构，实现良好的可重用。内容比较基础，笔者在这里不过多赘述。</p>
+<p>其次就是大名鼎鼎的设计模式。这些设计模式的目的其实都是一样的，就是让代码保持高内聚、低耦合，使得程序更加灵活，容易修改。因为在实际的业务中，需求一定是经常变更的。有时候甚至一天变好几次（祝大家遇不到这种leader和产品经理）。如果你的代码全部耦合在一起，那你改的时候会非常痛苦。笔者在此列举一下，看到不熟悉的可以再去针对性复习：</p>
+<ol>
+<li>简单工厂模式：用一个单独的类来创造实例。</li>
+<li>策略模式：针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。</li>
+<li>单一职责原则：一个类应该仅有一个引起它变化的原因。</li>
+<li>开放-封闭原则：软件实体应该可以扩展，但不可修改。</li>
+<li>依赖倒转原则：高层模块不应该依赖低层模块，两者都应该依赖抽象。抽象不应该依赖细节，细节应该依赖抽象。</li>
+<li>里氏替换原则：子类型必须能够替换它们的父类型。</li>
+<li>装饰模式：动态地给一个对象添加一些额外的职责。</li>
+<li>代理模式：为其他对象提供一种代理以控制对这个对象的访问。</li>
+<li>工厂方法模式：定义一个用于创建对象的接口，让子类决定实例化哪个类。工厂方法使一个类的实例化延迟到其子类。</li>
+<li>原型模式：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</li>
+<li>模板方法模式：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。通过把不变的行为搬移到超类，去除子类中的重复代码。</li>
+<li>迪米特法则（最少知识法则）：如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用。</li>
+<li>外观模式：为子系统中一组接口提供一个一致的界面。在设计初期就应该有意识地将两个不同的层分离。</li>
+<li>建造者模式：将一个复杂对象的构建和它的表示分离，使得同样的构建过程可以创建不用的表示。</li>
+<li>观察者模式（发布-订阅模式）：多个观察者对象同时监听某一个主题对象。这个主题对象发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</li>
+<li>抽象工厂模式：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们相关的类。</li>
+<li>状态模式：当一个对象的内在状态改变时允许其改变其行为。</li>
+<li>适配器模式：将一个类的接口转换为客户希望的另外一个接口。</li>
+<li>备忘录模式：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。（类似于游戏存档）</li>
+<li>组合模式：将对象组合成树形结构以表示“部分-整体”的层次结构。</li>
+<li>迭代器模式：提供一个方法顺序访问一个聚合对象的各个元素，而又不暴露该对象的内部表示。（Python中直接就有迭代器、可迭代对象和特殊的迭代器——生成器）</li>
+<li>单例模式：保证一个类仅有一个实例，并提供了一个访问它的全局访问点。（比如软件的页面，不能点一下就出来一个页面吧）分为饿汉式（线程安全）和懒汉式（多线程中线程不安全）。\</li>
+<li>桥接模式：将抽象部分与它的实现分离，使它们都可以独立变化。</li>
+<li>合成&#x2F;聚合复用原则：尽量使用合成&#x2F;聚合，尽量不用类继承。（进一步降低类之间的耦合）</li>
+<li>命令模式：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化。</li>
+<li>职责链模式：使多个对象都有机会处理请求，避免请求的发送者和接受者之间的耦合关系。</li>
+<li>中介者模式：用一个中介对象来封装一系列的对象交互。</li>
+<li>享元模式：运用共享技术有效地支持大量细粒度的对象。</li>
+<li>解释器模式：如正则表达式。</li>
+<li>访问者模式：表示一个作用于某对象结构中各元素的操作。使得可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</li>
+</ol>
+<h1 id="IOC与AOP"><a href="#IOC与AOP" class="headerlink" title="IOC与AOP"></a>IOC与AOP</h1><p>Spring中的两大护法：IOC（Inverse of Control，控制反转）和AOP（Aspect Oriented Programming，面向切面编程）。这两个模块作为Spring中最重要的两个设计思想，也反映了目前软件设计的主流技术思路。</p>
+<h2 id="IOC-控制反转"><a href="#IOC-控制反转" class="headerlink" title="IOC 控制反转"></a>IOC 控制反转</h2><p>IOC的主要目的是把对象的创建和对象之间的调用过程，交给Spring管理，降低耦合度。传统设计（正转） : 由我们主动控制去直接获取依赖对象。IOC（反转） : 由容器来创建及注入依赖的对象。为什么要使用IOC？设想一下，我们现在想写一个网上商城，商城中有许多商品，商品可以分成许多类，这些类内部有一些跟其他类并不相同的属性：比如衣服类，它有尺码，面料等、比如食品类，有生产日期、保质期等属性。这些商品品类众多，我们不可能在设计系统的时候就一一创建好这些类。所以，更好的方法是创建一个抽象商品类，后面出现新的品类时直接创建好了新商品类后提供给这个总类就可以了。在实现IOC的方法中，有一种非常常用的方法，就是Spring的DI（Dependency Injection，依赖注入），在程序运行的时候由IOC容器动态的将所依赖的对象加入到当前类中的过程。</p>
+<h2 id="AOP-面向切面编程"><a href="#AOP-面向切面编程" class="headerlink" title="AOP 面向切面编程"></a>AOP 面向切面编程</h2><p>而AOP解决的这样一个问题：假设我们现在有很多个不同的服务，但每个服务中都需要加入性能统计模块，日志记录模块等。相比于一个个服务这种竖向的操作，这些功能模块更像是横切在所有服务中的横切面。</p>
+<p><img src="https://s2.loli.net/2024/03/29/5oICLcn91t4Q6yM.png" alt="software2.png"></p>
+<p>AOP将这些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低模块之间的耦合度，并有利于未来的可操作性和可维护性。AOP把软件系统分为两个部分：<strong>核心关注点</strong>和<strong>横切关注点</strong>。业务处理的主要流程是核心关注点，与之关系不大的部分是横切关注点。横切关注点的一个特点是，他们经常发生在核心关注点的多处，而各处基本相似，比如权限认证、日志、事物。AOP的作用在于分离系统中的各种关注点，将核心关注点和横切关注点分离开来。</p>
+<h1 id="数据库与缓存"><a href="#数据库与缓存" class="headerlink" title="数据库与缓存"></a>数据库与缓存</h1><p>在业务开发中，最核心的不是代码，而是数据。可以说，代码就是为数据服务的。所以，对数据的处理至关重要。目前市面上已经有许多数据库，主要分为关系型和非关系型数据库，以及最近才流行起来的向量数据库等。</p>
+<p>对于一般的数据，我们将其存放在传统数据库中即可，如MySQL等。对于SQL类的数据库，重点掌握三大范式、事务的四种隔离级别以及它们引起的脏读、幻读等问题、索引等。数据库表的设计也需要注意高内聚、低耦合。查询语句方面注意避免笛卡尔积。索引方面注意几个让索引失效的场景。另外，当数据量或者用户量太大时，单个数据库往往不够用。这个时候我们需要使用多个数据库协同工作，这又会引起一系列的问题，如<a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1761712379001355128&wfr=spider&for=pc">主从数据库、分区分片、一致性解决方案等</a>。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>当我们数据量太大，或者某些数据请求频次过高时，我们如果继续使用MySQL等数据库响应时间就会过慢。这个时候我们需要将这些使用频率过高的数据放在读取更快的数据库里以提高系统的性能，最常用的就是Redis。Redis是键值数据库，使用起来非常方便。由于Redis使用内存作为存储空间，配合上高效的数据结构，使得它的读取速度非常快。但是，使用的时候需要注意<a target="_blank" rel="noopener" href="https://blog.csdn.net/sanylove/article/details/127885951">缓存雪崩、击穿。穿透等</a>问题，保证高频请求不直接请求到SQL数据库中。</p>
+<h1 id="ETL"><a href="#ETL" class="headerlink" title="ETL"></a>ETL</h1><p>ETL是将业务系统的数据经过<strong>抽取（Extract）</strong>、<strong>清洗转换（Transform）</strong>之后<strong>加载（Load）</strong>到数据仓库的过程，目的是将企业中的分散、零乱、标准不统一的数据整合到一起，为企业的决策提供分析依据， ETL是BI（商业智能）项目重要的一个环节。</p>
+<h2 id="数据抽取"><a href="#数据抽取" class="headerlink" title="数据抽取"></a>数据抽取</h2><p>数据源是指存储数据的源头，包括结构化数据、半结构化数据、非结构化数据等。</p>
+<ol>
+<li>结构化数据：可以采用直连数据库的方式进行抽取，一般采用JDBC（Java Database Connectivity）。这种方式的优点是数据抽取效率高，但会增加数据库负载，因此需要控制抽取时间，一般企业选择在凌晨进行结构化数据的抽取。另外，也可以通过数据库日志方式进行抽取，这种方式对数据库产生的影响极小，但需要解析日志。</li>
+<li>半结构化数据和非结构化数据：一般进行抽取所采用的方式为监听文件变动。这种方式的优点是比较灵活，可以实时抽取变动的内容，但需要解决增量抽取和数据格式转换等问题。<br>  在抽取数据时，一般会采以下两种方式：</li>
+</ol>
+<ul>
+<li>全量同步：将全部数据抽取到目标系统中，一般用于数据初始化装载。</li>
+<li>增量同步：检测数据变动，只抽取发生变动的数据，一般用于数据更新。</li>
+</ul>
+<h2 id="数据转换"><a href="#数据转换" class="headerlink" title="数据转换"></a>数据转换</h2><p>数据转换主要是将抽取的数据进行标准化处理，使其符合目标系统和业务需求。</p>
+<ol>
+<li><p>对于结构化数据，转换的逻辑相对简单，主要是对表结构和字段进行标准化处理。</p>
+</li>
+<li><p>对于半结构化数据和非结构化数据，转换的逻辑更为复杂，需要进行文本解析、数据提取、数据关联和数据格式转换等操作。</p>
+</li>
+</ol>
+<p>在数据转换过程中，需要根据数据源的不同，针对性地选择合适的转换工具，例如数据仓库ETL（Extract-Transform-Load）工具、ELT（Extract-Load-Transform）工具、自定义脚本等。同时，还需要根据业务需求和目标系统的要求，对转换规则进行定义和调整，以保证转换后的数据符合目标系统的要求。</p>
+<p>数据清洗是数据转换的一个子集，主要是对原始数据进行清理、过滤、去重、处理异常数据等操作，以消除数据中的问题，如数据重复、二义性、不完整、违反业务或逻辑规则等，保证数据的准确性和稳定性。</p>
+<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h2><p>数据加载主要是将清洗、转换后的数据导入到目标数据源中，为企业业务提供数据支持。</p>
+<p>数据加载的方式有两种：全量加载和增量加载。</p>
+<ol>
+<li><p>全量加载是将所有数据都导入目标数据源中，适用于首次加载或者数据量较小的情况。</p>
+</li>
+<li><p>增量加载是只将新增或修改的数据导入目标数据源中，以节省加载时间和系统资源，适用于数据量较大的情况。</p>
+</li>
+</ol>
+<p>数据加载可以采用多种工具和方式，如数据仓库ETL工具、手动编写的SQL脚本、程序编写等。其中数据仓库ETL工具是最常用的工具之一，能够提供可视化的操作界面和强大的处理能力，可大幅减少开发和维护工作量。</p>
+<p>数据加载时，需要注意数据类型、长度、格式等问题，保证数据的完整性和准确性。同时，也要根据业务需求和目标系统的要求，对数据进行拆分、合并、计算等操作，使之符合业务需求和目标系统的要求。</p>
+<h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><p>中间件是系统软件和用户应用软件之间连接的软件，以便于软件各部件之间的沟通。引入中间件的目的一是为了屏蔽了底层操作系统的复杂性，二是屏蔽技术架构的复杂性。使程序开发人员面对一个简单而统一的开发环境，减少程序设计的复杂性，将注意力集中在自己的业务上，不必再为程序在不同系统软件上的适配而重复工作，从而大大减少了技术上的负担。中间件带给系统的，不只是开发的便捷，开发周期的缩短，也减少了系统的维护、运行和管理的工作量，还减少了总体费用的投入。</p>
+<p>常用的中间件有以下几类：</p>
+<ul>
+<li><p>路由与web服务器：处理和转发其他服务器通信数据的服务器。 </p>
+</li>
+<li><p>RPC框架：微服务时代的远程服务调用框架。</p>
+</li>
+<li><p>消息中间件：支持在分布式系统之间发送和接收消息的软件。 如 Apache kafka, Apache RabbitMQ。</p>
+</li>
+<li><p>缓存服务: 分布式的高速数据存储层，一般是内存存储。如Redis。</p>
+</li>
+<li><p>配置中心：用来统一管理各个项目中所有配置的系统。</p>
+</li>
+<li><p>分布式事务：事务的参与者、支持事务的服务器、资源服务器以及事务管理器分别位于不同的分布式系统的不同节点之上。</p>
+</li>
+</ul>
+<h1 id="容器技术"><a href="#容器技术" class="headerlink" title="容器技术"></a>容器技术</h1><p>容器技术是一种高效的应用程序部署方法，允许开发人员在隔离环境中打包和运行应用程序，这一过程被称为容器化。容器技术的出现解决了传统部署方法中存在的一系列问题，使得软件开发和部署更加一致、高效。</p>
+<p>相信大家之前都被各种环境不兼容等问题折磨过。明明在本地跑得好好的，一到服务器那边就跑不通了。这就是因为程序运行时依赖的组件不同。容器化是一种将应用程序及其依赖项打包到一个独立、可移植的容器中的技术。这个容器包含了应用程序的所有运行时所需的组件，例如代码、运行时环境、库和系统工具。与传统的部署方法不同，容器的关键思想是在不同的环境中实现一致性，无论是在开发人员的本地工作站还是在生产服务器上部署，都无需担心操作系统配置和底层基础设施的差异。</p>
+<p>有些同学可能会问，那我用虚拟机不也一样吗？容器是轻量级的，它需要的资源更少，更为高效。另外，它的启动时间、管理与维护难度等也要低不少。另外，容器具有很高的可移植性，正如下图中最流行的容器Docker的图标一样，容器这个“集装箱”可以被很方便地运往各地。</p>
+<p><img src="https://s2.loli.net/2024/03/29/qujL6vZkanWOCDe.png" alt="software3.png"></p>
+<h2 id="容器调度"><a href="#容器调度" class="headerlink" title="容器调度"></a>容器调度</h2><p>在大型系统中，不可能只有一个容器。一个系统可能是由几百上千甚至更多的容器组成的。它们之间彼此协同彼此通信共同构成一个完整的系统。那么这些容器的编排调度也就成了一个亟待解决的问题。k8s就是一个开源的业内广为使用的解决方案。k8s全称Kubernetes，名字缩写的由来是K和s之间有8个字母（同类的缩写还有Internationalization，i18n）。它是一个开源的容器编排引擎，用于自动部署、扩展和管理容器化应用程序的开源系统。它将组成应用程序的容器组合成逻辑单元，以便于管理和服务发现。</p>
+<p>除了管理调度各容器之外，k8s还使得容器可以进行动态缩放。比如，公司现在有2个不同的业务。周一到周五A业务访问量很大，但周末几乎无人访问。而B业务周末访问量很大，但工作日无人问津。在这种场景下，两个业务都配备访问量最大时的服务器就非常不划算。如果使用k8s，那么就可以动态地增减两个业务的容器数量，减少服务器成本。</p>
+<h1 id="分布式与集群"><a href="#分布式与集群" class="headerlink" title="分布式与集群"></a>分布式与集群</h1><h2 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h2><p>在用户量比较小的时候，我们只用一台服务器就能满足需求。但是，像阿里字节腾讯这种互联网大厂，它们的产品用户量级都是亿级。一台服务器是远远不够用的。因此，它们的业务需要部署在几万几十万台服务器上。这就需要构建集群，使用分布式的架构。</p>
+<p>分布式架构是一种将应用程序分解成多个独立组件并将其分布在不同的计算机或服务器上的设计模式。这种架构可以提高系统的可伸缩性、可靠性和性能，并允许多个组件同时运行，提高系统的吞吐量。比如，抽出一个服务器只处理登录鉴权功能，一个服务器只处理MySQL数据查询，一个服务器只处理业务逻辑……</p>
+<h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><p>但上述例子中的分布式有个问题。如果其中一个服务器突然宕机，对应的服务将彻底无法使用，从而带动整个系统瘫痪。为了避免这种现象，我们需要将多个服务器组合起来，形成一个集群。一群服务器处理一种请求，某一个服务器宕机了，请求可以被其他服务器接管处理，保证用户体验。</p>
+<h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><p>随着访问量的逐渐增大，单一应用只能依靠增加节点来应对，但是这时候会发现并不是所有的模块都会有比较大的访问量。以电商为例， 用户访问量的增加可能影响的只是用户和订单模块， 但是对消息模块的影响就比较小。那么此时我们希望只多增加几个订单模块， 而不增加消息模块。再比如，大公司内可能不同的组有不同的技术栈，支付模块用JAVA编写，消息管理模块的组却是用Go语言。这就需要我们将系统中的服务尽量小地拆分出来，每个模块只负责某一个很小的服务。服务原子化拆分，独立打包、部署和升级，保证每个微服务清晰的任务划分，利于扩展。微服务之间采用RESTful等轻量级Http协议相互调用。服务各自有自己单独的职责，服务之间松耦合，避免因一个模块的问题导致服务崩溃。</p>
+<p>微服务架构中也需要注意许多问题：</p>
+<ul>
+<li><p>服务治理</p>
+<p>进行服务的自动化管理，其核心是服务的注册与发现。</p>
+</li>
+<li><p>服务调用</p>
+<p>在微服务架构中，通常存在多个服务之间的远程调用的需求，目前主流的远程调用的技术有基于HTTP请求的RESTFul接口及基于TCP的RPC协议。</p>
+</li>
+<li><p>服务网关</p>
+<p>随着微服务的不断增多，不同的微服务一般会有不同的网络地址，而外部客户端可能需要调用多个服务的接口才能完成一个业务需求，如果让客户端直接与各个微服务通信可能出现：客户端需要调用不同的url地址，增加难度。在一定的场景下，存在跨域请求的问题。每个微服务都需要进行单独的身份认证。为了解决这些问题，API网关顺势而生。</p>
+</li>
+<li><p>服务容错</p>
+<p>在微服务当中，一个请求经常会涉及到调用几个服务，如果其中某个服务不可用，没有做服务容错的话，极有可能会造成一连串的服务不可用，这就是雪崩效应。</p>
+<p>我们没法预防雪崩效应的发生，只能尽可能去做好容错。服务容错的三个核心思想是：不被外界环境影响。不被上游请求压垮。不被下游响应拖垮。</p>
+</li>
+<li><p>链路追踪</p>
+<p>随着微服务架构的流行，服务按照不同的维度进行拆分，一次请求往往需要涉及到多个服务。互联网应用构建在不同的软件模块集上，这些软件模块，有可能是由不同的团队开发、可能使用不同的编程语言来实现、有可能布在了几千台服务器，横跨多个不同的数据中心。因此，就需要对一次请求涉及的多个服务链路进行日志记录，性能监控即链路追踪。</p>
+</li>
+</ul>
+<h1 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h1><p>近些年随着云平台的不断完善，许多业务都不需要自己再购买服务器或者构建软件，而是使用云计算提供的服务完成。这些服务大致可以分为如下几类：</p>
+<ul>
+<li><strong>SaaS（Software as a Service，软件即服务）</strong>：它提供给用户的是已经构建好的应用程序。用户通过互联网访问和使用这些应用程序，无需关心底层的基础设施和平台。用户可以根据需要订阅和使用这些应用服务，并按照订阅模式支付费用。例如，阿里巴巴旗下的企业级 SaaS 平台提供了多个企业级 SaaS 应用，如企业邮箱、云办公套件、智能客服等。</li>
+<li><strong>PaaS（Platform as a Service，平台即服务）</strong>：它提供给用户的是一个开发环境和工具集合。用户可以在这个平台上构建、测试、部署和管理自己的应用程序。PaaS 为开发者提供了更高层次的抽象，使他们可以专注于应用程序的开发而不必关心底层的基础设施。PaaS 通常包括运行时环境、数据存储、开发工具和部署管理等功能。例如，阿里云云原生应用平台提供容器服务、云原生数据库、云原生网络等 PaaS 服务。</li>
+<li><strong>IaaS（Infrastructure as a Service，基础设施即服务）</strong>：IaaS 是云计算的一种服务模式，提供给用户的是基础设施层的资源，包括虚拟化的计算资源（如虚拟机、服务器）、存储资源和网络资源。用户可以根据需要按需租用这些资源，灵活地扩展和管理自己的应用程序。IaaS 提供了更底层的灵活性和控制权，用户可以自行配置和管理操作系统、中间件和应用程序等。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://sdupc.top">Chao Pang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://sdupc.top/2024/03/28/software_design/">http://sdupc.top/2024/03/28/software_design/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://sdupc.top" target="_blank">Chao Pang的个人主页</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF/">开发技术</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/06/dps/" title="数字信号处理"><img class="cover" src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数字信号处理</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img class="cover" src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ChatGPT的流式输出</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img class="cover" src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-16</div><div class="title">ChatGPT的流式输出</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/11/29/nu4tpl8PIgFQBAr.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Chao Pang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Pang-chao"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Pang-chao" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pc@sdupc.top" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/sdu-pc" target="_blank" title="Leetcode"><i class="fas fa-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">一个热爱古诗词和历史的 ISTJ ，欢迎来到我的个人主页~有任何问题都可以与我邮件交流！邮箱：pc@sdupc.top</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">设计模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IOC%E4%B8%8EAOP"><span class="toc-number">3.</span> <span class="toc-text">IOC与AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IOC-%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="toc-number">3.1.</span> <span class="toc-text">IOC 控制反转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP-%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">AOP 面向切面编程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="toc-number">4.</span> <span class="toc-text">数据库与缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-number">4.1.</span> <span class="toc-text">缓存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ETL"><span class="toc-number">5.</span> <span class="toc-text">ETL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96"><span class="toc-number">5.1.</span> <span class="toc-text">数据抽取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-number">5.2.</span> <span class="toc-text">数据转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD"><span class="toc-number">5.3.</span> <span class="toc-text">数据加载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">中间件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF"><span class="toc-number">7.</span> <span class="toc-text">容器技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E8%B0%83%E5%BA%A6"><span class="toc-number">7.1.</span> <span class="toc-text">容器调度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8E%E9%9B%86%E7%BE%A4"><span class="toc-number">8.</span> <span class="toc-text">分布式与集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">8.1.</span> <span class="toc-text">分布式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4"><span class="toc-number">8.2.</span> <span class="toc-text">集群</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">9.</span> <span class="toc-text">微服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97"><span class="toc-number">10.</span> <span class="toc-text">云计算</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/06/dps/" title="数字信号处理"><img src="https://s2.loli.net/2024/07/06/KlhjmBI9UvkFCAx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数字信号处理"/></a><div class="content"><a class="title" href="/2024/07/06/dps/" title="数字信号处理">数字信号处理</a><time datetime="2024-07-06T07:17:56.000Z" title="发表于 2024-07-06 15:17:56">2024-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/28/software_design/" title="现代软件开发中的模式"><img src="https://s2.loli.net/2024/03/28/C79cXYjarenqxOo.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="现代软件开发中的模式"/></a><div class="content"><a class="title" href="/2024/03/28/software_design/" title="现代软件开发中的模式">现代软件开发中的模式</a><time datetime="2024-03-28T14:34:28.000Z" title="发表于 2024-03-28 22:34:28">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出"><img src="https://s2.loli.net/2024/03/19/uLRs8M3VjJtXbZk.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ChatGPT的流式输出"/></a><div class="content"><a class="title" href="/2024/03/16/stream_output/" title="ChatGPT的流式输出">ChatGPT的流式输出</a><time datetime="2024-03-16T06:29:48.000Z" title="发表于 2024-03-16 14:29:48">2024-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/pep8/" title="Python编写规范PEP8"><img src="https://s2.loli.net/2023/11/21/Vs2j54JkSU6olAN.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python编写规范PEP8"/></a><div class="content"><a class="title" href="/2024/02/14/pep8/" title="Python编写规范PEP8">Python编写规范PEP8</a><time datetime="2024-02-14T06:54:36.000Z" title="发表于 2024-02-14 14:54:36">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理"><img src="https://s2.loli.net/2024/01/07/rksO1omUKd9HABq.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="知识与推理"/></a><div class="content"><a class="title" href="/2024/01/04/knowledge&amp;reasoning/" title="知识与推理">知识与推理</a><time datetime="2024-01-04T02:14:57.000Z" title="发表于 2024-01-04 10:14:57">2024-01-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Chao Pang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
